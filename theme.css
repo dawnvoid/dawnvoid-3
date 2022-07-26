@@ -204,7 +204,9 @@ footer {
     /* background-image: url(/assets/bg/171027.jpg); */
     /* background-image: url(/assets/bg/L.jpg); */
     /* background-image: url(/assets/bg/M.jpg); */
-    background-image: url(/assets/bg/N.png);
+    /* background-image: url(/assets/bg/N.png); */
+    background-image: url(/assets/bg/N_dithered.png);
+    /* background-image: url(/assets/bg/N_dithered2.png); */
     /* background-repeat: repeat; */
     /* background-repeat: no-repeat; */
     background-position: center;
