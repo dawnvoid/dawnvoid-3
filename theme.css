@@ -201,7 +201,8 @@ footer {
     /* background-image: url(/assets/bg/nurple-static-bright.gif); */
     background-image: url(/assets/bg/stars3.gif);
     background-repeat: repeat;
-    opacity: 0.3;
+    opacity: 0.5;
+    /* opacity: 1; */
 
     display: block;
     position: fixed;
