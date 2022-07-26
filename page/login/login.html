@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="/lib/reset.css">
+        <link rel="stylesheet" href="/lib/colors.css">
+        <link rel="stylesheet" href="/theme.css">
+
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
+
+        <title>&nbsp;</title>
+
+        <style>
+            body {
+                /* color: var(--nord-11); */
+                color: slategray;
+            }
+
+            form {
+                margin-bottom: 1rem;
+            }
+    
+            form input {
+                /* color: var(--nord-11); */
+                /* color: palevioletred; */
+                color: crimson;
+                background-color: transparent;
+                border: none;
+                outline: none;
+    
+                font: inherit;
+                text-align: center;
+                letter-spacing: normal;
+                text-indent: 0;
+    
+                display: block;
+                width: 100%;
+                margin: 0 auto;
+    
+                transition: all 0.5s ease;
+            }
+            form input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                color: slategray;
+                opacity: 0.5;
+            }
+            form input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+                color: slategray;
+                opacity: 0.5;
+            }
+            form input::-ms-input-placeholder { /* Microsoft Edge */
+                color: slategray;
+                opacity: 0.5;
+            }
+
+    
+            form button {
+                /* color: var(--nord-11); */
+                /* color: palevioletred; */
+                color: crimson;
+                background-color: transparent;
+                border: 1px solid transparent;
+                outline: none;
+    
+                font: inherit;
+                text-align: center;
+                letter-spacing: normal;
+                text-indent: 0;
+    
+                display: block;
+                width: 100%;
+                margin: 0 auto;
+    
+                cursor: pointer;
+    
+                transition: all 0.5s ease;
+            }
+            form input:focus {
+                /* color: var(--nord-11); */
+                /* color: palevioletred; */
+                color: crimson;
+    
+                letter-spacing: 1ch;
+                text-indent: 1ch;
+                
+                transition: all 0.5s ease;
+            }
+            form button:hover {
+                /* border-color: var(--nord-11); */
+                border-color: crimson;
+    
+                transition: all 0.5s ease;
+            }
+
+            .page-bg {
+                background-image: url(/assets/bg/0064_small.gif);
+                opacity: 0.8;
+            }
+    
+        </style>
+    </head>
+    
+    <body>
+        <div class="page-bg"></div>
+
+        <div class="content">
+            <div class="card fade-in">
+                <h1 class="fade-in" style="animation-delay: 0.1s;">&lceil; Login &rfloor;</h1>
+                <img src="/assets/angel.gif" width="256" height="128" class="fade-in" style="margin: 0 auto; animation-delay: 0.2s;">
+                <nav class="fade-in" style="animation-delay: 0.3s;">
+                    <a href="/">..</a>
+                </nav>
+
+                <form action="https://rats.chat/includes/login-inc.php" method="post" autocomplete="off">
+                    <input autocomplete="false" name="hidden" type="text" style="display:none;">
+                    <input class="fade-in" style="animation-delay: 0.4s;" type="text" name="uid" placeholder="username">
+                    <input class="fade-in" style="animation-delay: 0.5s;" type="password" name="pwd" placeholder="password">
+                    <button class="fade-in" style="animation-delay: 0.6s;" type="submit" name="submit">Login</button>
+                </form>
+
+
+
+                <footer>
+                    <p class="fade-in" style="animation-delay: 0.7s;">
+                        To join you must receive an invitation from an existing user. There is no use in trying to beg, ask/request for an invite, we choose our new members with care.
+                    </p>
+                    <p class="fade-in" style="animation-delay: 0.8s; margin-top: 1rem;">
+                        <!-- There are <span style="color: var(--nord-11);">30</span> registered users. -->
+                        There are <span style="color: crimson;">30</span> registered users.
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>

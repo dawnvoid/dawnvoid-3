@@ -1,0 +1,57 @@
+/*  
+    Simple CSS CRT filter by 𝕂𝕣𝕪𝕡𝕥𝕠𝕟𝕒𝕦𝕥 (et al). My eclectic site -> https://kry.pt 
+    Inspired by this filter by Alec Lownes: http://aleclownes.com/2017/02/01/crt-display.html . 
+    Hopefully less RAM-hogging for those (like me) who hear their laptop fans spin up every 
+    time they open their sites on Chrome or Edge.
+
+    Made with love for the Neocities community <3
+    Version 1.4 - MAR 2022
+*/
+
+/*
+    Instead of pure CSS like Alec's, I used a small APNG of a collection of pixels 
+    for the "screen door" effect. Results in happy RAM but requires, yaknow, the image.
+    This sometimes results in the filter loading slowly but is nice for pixel perfect scaling.
+    If your browser doesn't support APNG, it will use the first frame as a fallback!
+*/
+#crt {
+    background-image: url('pixel.apng');
+    background-size: 2px 1px;
+    background-color: white;
+    background-blend-mode: hard-light;  /* <- Helps combat the 'darkening' effect from multiply.  */
+    mix-blend-mode: multiply;
+    pointer-events: none;
+}
+
+/*
+    Stretches DIV to edges of screen.
+*/
+#crt   {
+    position: fixed; 
+    width: 100%; 
+    top: 0; 
+    bottom: 0; 
+    right: 0; 
+    left: 0;
+    z-index: 9999;
+}
+
+/*
+    Decided to leave this in as a usable class, 
+    since it is useful to span a DIV to the edges 
+    of your screen.
+*/
+.screen   {
+    position: fixed; 
+    width: 100%; 
+    top: 0; 
+    bottom: 0; 
+    right: 0; 
+    left: 0;
+}
+
+/* Temporary Firefox opacity quickfix (less headache-inducing, unfortunately spikes the RAM usage)  */
+
+@-moz-document url-prefix(){
+    #crt    {opacity: 0.1;}
+}

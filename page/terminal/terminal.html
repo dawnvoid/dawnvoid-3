@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>ℂ𝕙𝕖𝕣𝕣𝕪 𝔹𝕝𝕠𝕤𝕤𝕠𝕞</title>
+
+        <style>
+            html {
+                /* color: goldenrod; */
+                color: palevioletred;
+                background-color: black;
+    
+                font-family: 'Inconsolata', 'Courier New', Courier, monospace;
+            }
+
+            body {
+                /* max-width: 80ch;
+                margin: 0 auto 25vh auto;
+                padding: 1ch; */
+                margin: 0;
+                padding: 0;
+
+                -ms-overflow-style: none;  /* Hide scrollbars on IE and Edge */
+                scrollbar-width: none;  /* Hide scrollbars on Firefox */
+            }
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            body::-webkit-scrollbar {
+                display: none;
+            }
+
+            .pagewidth {
+                max-width: 80ch;
+                margin: 0 auto 25vh auto;
+                padding: 1ch;
+            }
+    
+            /* #crt {
+                background-image: url('pixel.apng');
+                background-size: 2px 1px;
+                background-color: white;
+                background-blend-mode: hard-light;
+                mix-blend-mode: multiply;
+                pointer-events: none;
+            } */
+    
+            #scanlines {
+                /* background: repeating-linear-gradient(transparent, transparent 2px, blue 3px, blue 3px); */
+                background: repeating-linear-gradient(transparent, transparent 2px, white 3px, white 3px);
+                background-size: auto 100%;
+                background-position: center center;
+                background-blend-mode: overlay;
+                opacity: 0.2;
+    
+                position: fixed;
+                width: 100%;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 9999;
+    
+                pointer-events: none;
+            }
+    
+            a {
+                color: burlywood;
+    
+                text-decoration: none;
+            }
+            a::before {
+                content: "/";
+            }
+            a::after {
+                content: "/";
+            }
+            a:hover::before {
+                content: "[";
+            }
+            a:hover::after {
+                content: "]";
+            }
+    
+            h1 {
+                font-weight: bold;
+                
+                margin-top: 2rem;
+            }
+            h2 {
+                font-weight: bold;
+    
+                margin-top: 2rem;
+            }
+    
+            .cursor {
+                animation: blink 1s step-end infinite;
+            }
+            @keyframes blink {
+                50% {
+                    opacity: 0;
+                }
+            }
+    
+            /* ol {
+                list-style-type: decimal;
+                list-style-position: inside;
+            } */
+    
+            ul li::before {
+                content: "- ";
+            }
+    
+            table {
+                border: 1px solid;
+    
+                margin-bottom: 1rem;
+            }
+            table th {
+                color: black;
+                background-color: palevioletred;
+                border: 1px solid palevioletred;
+    
+                text-align: center;
+    
+                padding: 0 1ch;
+            }
+            table td {
+                border: 1px solid;
+    
+                text-align: center;
+    
+                padding: 0 1ch;
+            }
+    
+            p {
+                margin-bottom: 1rem;
+            }
+
+            #output {
+                line-break: anywhere;
+            }
+            .outline {
+                /* display: block; */
+                outline: 1px dotted;
+                /* width: max-content; */
+                /* width: min(max-content, 100%); */
+            }
+            .invert {
+                color: black;
+                background-color: palevioletred;
+            }
+
+
+
+            #prompt {
+                color: black;
+                background-color: palevioletred;
+
+                display: flex;
+                flex-flow: row nowrap;
+            }
+            #prompt-input {
+                border: none;
+                outline: none;
+                background-color: transparent;
+                color: inherit;
+
+                font: inherit;
+
+                display: inline-block;
+                /* min-width: 100%; */
+                flex: 1 1;
+                margin: 0;
+                /* padding: 0 0 auto 0; */
+                padding: 0;
+
+                caret-color: inherit;
+                caret-shape: block; /* Has almost no support but just in case... */
+            }
+            #prompt-input:focus {
+                border: none;
+                outline: none;
+                background-color: transparent;
+                color: inherit;
+
+                caret-color: inherit;
+                caret-shape: block; /* Has almost no support but just in case... */
+            }
+
+            .intro {
+                color: palevioletred;
+                background-color: black;
+
+                display: block;
+                position: absolute;
+
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+
+                z-index: 9998; /* Scanlines are z-index 9999. */
+                user-select: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="scanlines"></div>
+
+        <div class="pagewidth">
+            <nav>
+                <a href="/">..</a>
+            </nav>
+            
+            <div id="output">
+                <img src="cherry_blossom_branch.png" style="float: right; max-width: 50%; margin-left: 1ch; margin-bottom: 1ch;">
+                cherry blossom terminal 0.1.0
+                <br>Type 'help' for help.
+            </div>
+            
+            <form id="prompt" action="">
+                <div id="prompt-decorator" class="bold">/&gt;&nbsp;</div>
+                <input type="text" id="prompt-input" class="bold" autocomplete="off" autofocus>
+                <input type="submit" style="display: none">
+            </form>
+            
+            <script>
+                // +---------------------+
+                // | Emulate file system |
+                // +---------------------+
+                class Directory {
+                    constructor(parent, name, children=[]) {
+                        this.parent = parent
+                        this.name = name
+                        this.children = children
+                    }
+
+                    create_directory(name) {
+                        let folder = new Directory(this, name)
+                        this.children.push(folder)
+                        return folder
+                    }
+
+                    create_file(name, contents='') {
+                        let file = new File(this, name, contents)
+                        this.children.push(file)
+                        return file
+                    }
+                }
+
+                class File {
+                    constructor(parent, name, contents='') {
+                        this.parent = parent
+                        this.name = name
+                        this.contents = contents
+                    }
+                }
+
+                let root_dir = new Directory(null, '/', [])
+                let home_dir = root_dir.create_directory('home')
+                let dawn_dir = home_dir.create_directory('dawn')
+                let mnt_dir = root_dir.create_directory('mnt')
+                let hi_txt_file = dawn_dir.create_file('hi.txt',
+                    'hello, world!\nlorem ipsum'
+                )
+                let lorem_txt_file = dawn_dir.create_file('lorem.txt',
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                )
+                let pwd = root_dir
+
+                function enterDirectory(target_dir) {
+                    pwd = target_dir
+                }
+
+                function exitDirectory() {
+                    if (pwd.parent) {
+                        pwd = pwd.parent
+                    }
+                }
+
+                // Splits path string into tokens:
+                function splitPath(path) {
+                    console.log('splitting path into tokens...')
+                    let tokens = []
+                    let token = ''
+
+                    if (path[0] === '/') {
+                        console.log('/ (absolute path)')
+                        tokens.push('/')
+                        path = path.slice(1)
+                    }
+
+                    for (let idx_c = 0; idx_c < path.length; idx_c++) {
+                        let c = path[idx_c]
+
+                        if (c === '/') {
+                            if (token) {
+                                console.log('/ (token = ' + token + ')')
+                                tokens.push(token)
+                                token = ''
+                            }
+                        } else {
+                            token = token + c
+                        }
+                    }
+                    console.log('end of path (token = ' + token + ')')
+                    if (token) {
+                        tokens.push(token)
+                        token = ''
+                    }
+
+                    console.log(tokens)
+                    return tokens
+                }
+
+                function getFileItem(path) {
+                    console.log("fetching fileitem at path '" + path + "'...")
+
+                    // Split path into tokens:
+                    let tokens = splitPath(path)
+
+
+                    // Attempt to get the fileitem at the path:
+                    console.log("finding fileitem at path '" + path + "'...")
+                    let is_done = false
+                    let current_fileitem = pwd
+                    if (tokens[0] === '/') {
+                        current_fileitem = root_dir
+                        tokens = tokens.slice(1)
+                    }
+                    console.log(current_fileitem)
+
+                    while (tokens.length > 0) {
+
+                        if (tokens[0] === '.') {
+                            // Do nothing
+                            tokens = tokens.slice(1)
+                        } else if (tokens[0] === '..') {
+                            if (current_fileitem.parent) {
+                                current_fileitem = current_fileitem.parent
+                            }
+                            tokens = tokens.slice(1)
+                        } else {
+                            let is_found = false
+                            for (let idx_fileitem = 0; idx_fileitem < current_fileitem.children.length; idx_fileitem++) {
+                                let fileitem = current_fileitem.children[idx_fileitem]
+        
+                                if (fileitem instanceof Directory) {
+                                    if (fileitem.name === tokens[0]) {
+                                        current_fileitem = fileitem
+                                        is_found = true
+                                        tokens = tokens.slice(1)
+                                        break
+                                    }
+                                } else if (fileitem instanceof File) {
+        
+                                    // Only files at the end of a path are valid targets:
+                                    if (tokens.length === 1) {
+                                        if (fileitem.name === tokens[0]) {
+                                            current_fileitem = fileitem
+                                            is_found = true
+                                            tokens = tokens.slice(1)
+                                            break
+                                        }
+                                    }
+                                }
+                            }
+        
+                            if (!is_found) {
+                                current_fileitem = null
+                                break
+                            }
+                        }
+
+                    }
+
+                    console.log(current_fileitem)
+
+                    return current_fileitem
+                }
+
+                function getFullPath(item) {
+                    let path = ''
+                    let current_item = item
+                    while (current_item.parent) {
+                        if (path === '') {
+                            path = current_item.name
+                        } else {
+                            path = current_item.name + '/' + path
+                        }
+                        current_item = current_item.parent
+                    }
+                    path = '/' + path
+
+                    return path
+                }
+
+                // Given a list of path tokens, create directories if they don't exist.
+                function createDirectories(tokens) {
+                    let current_dir = pwd
+                    if (tokens[0] === '/') {
+                        current_dir = root_dir
+                        tokens = tokens.slice(1)
+                    }
+
+                    while (tokens.length > 0) {
+                        
+                        let is_found = false
+                        for (let idx_child = 0; idx_child < current_dir.children.length; idx_child++) {
+                            let child = current_dir.children[idx_child]
+                            if (child.name === tokens[0] && child instanceof Directory) {
+                                console.log("directory '" + child.name + "' found, descending")
+                                current_dir = child
+                                tokens = tokens.slice(1)
+                                is_found = true
+                            }
+                        }
+
+                        if (!is_found) {
+                            console.log("directory '" + tokens[0] + "' not found, creating")
+                            current_dir = current_dir.create_directory(tokens[0])
+                            tokens = tokens.slice(1)
+                        }
+                    }
+                }
+
+
+
+
+                // +------------------------+
+                // | Emulate terminal input |
+                // +------------------------+
+
+                let output = document.getElementById('output')
+                let prompt_decorator = document.getElementById('prompt-decorator')
+                let prompt_input = document.getElementById('prompt-input')
+
+                let aliases = {
+                    '?': 'help',
+                    'cls': 'clear',
+                    'dir': 'ls',
+                    'info': 'about',
+                }
+
+                // Check if a string is only whitespace:
+                function isWhiteSpace(str) {
+                    return /^\s*$/.test(str);
+                }
+
+                // Write text to the output:
+                function write(str='') {
+                    str = str.replace('\t', '&nbsp;&nbsp;&nbsp;&nbsp;') // Replace tab characters with 4 spaces.
+                    output.innerHTML += str
+                }
+
+                // Write a line of text to the output:
+                function writeln(str='') {
+                    if (isWhiteSpace(output.innerHTML)) {
+                        write(str)
+                    } else {
+                        write('<br>' + str)
+                    }
+                }
+
+                function writeError(str='') {
+                    writeln('[ERROR] ' + str)
+                }
+
+                function writeLines(str='') {
+                    str = str.replace('\n', '<br>')
+                    writeln(str)
+                }
+
+                // Lex input into tokens:
+                function lex(command) {
+                    let tokens = []
+                    let token = ''
+                    let in_string = false
+                    for (let c_idx = 0; c_idx < command.length; c_idx++) {
+                        let c = command[c_idx]
+
+                        if (c === '"') {
+                            in_string = !in_string
+                            if (in_string) {
+                                console.log('open quote')
+                            } else {
+                                console.log('close quote')
+                            }
+                        } else if (isWhiteSpace(c)) {
+                            if (in_string) {
+                                console.log('whitespace (in string)')
+                                token = token + c
+                            } else {
+                                console.log('whitespace (token = ' + token + ')')
+                                if (!isWhiteSpace(token)) {
+                                    tokens.push(token)
+                                }
+                                token = ''
+                            }
+                        } else if (c === ';') {
+                            if (in_string) {
+                                console.log('semicolon (in string)')
+                                token = token + c
+                            } else {
+                                console.log('semicolon')
+                                if (!isWhiteSpace(token)) {
+                                    tokens.push(token)
+                                }
+                                token = ''
+                                tokens.push(';')
+                            }
+                        } else {
+                            token = token + c
+                            console.log(c)
+                        }
+                    }
+                    console.log('end of input (token = ' + token + ')')
+                    if (!isWhiteSpace(token)) {
+                        tokens.push(token)
+                    }
+                    token = ''
+
+                    // If there's no tokens, don't explode:
+                    if (tokens.length <= 0) {
+                        tokens = ['']
+                    }
+
+                    return tokens
+                }
+
+                // Parse tokens into commands:
+                function parse(tokens) {
+                    let commands = []
+
+                    let command = []
+                    for (let token_idx = 0; token_idx < tokens.length; token_idx++) {
+                        let token = tokens[token_idx]
+
+                        if (token == ';') {
+                            console.log('; (end of command)')
+                            commands = commands.concat([command]) // Array.concat() creates a new copy.
+                            command = []
+                        } else {
+                            console.log(token)
+                            command.push(token)
+                        }
+                    }
+                    console.log('end of tokens')
+                    commands = commands.concat([command]) // Array.concat() creates a new copy.
+                    command = []
+
+                    // If there's no commands, don't explode:
+                    if (commands.length <= 0) {
+                        commands = ['']
+                    }
+
+                    return commands
+                }
+
+
+
+                function cmdTemplate(args) {
+                    let result = ''
+                    let is_ok = true
+
+                    // Put stuff here.
+
+                    return [result, is_ok]
+                }
+
+                function cmdAbout(args) {
+                    let result = ''
+                    let is_ok = true
+
+                    if (args.length > 0) {
+                        result = 'too many arguments (expected 0)'
+                        is_ok = false
+                    }
+
+                    // interpret('clear', []) // Commands can call other commands!
+
+                    if (is_ok) {
+                        let info_text = '<img src="cherry_blossom_branch.png" style="float: right; max-width: 50%; margin-left: 1ch; margin-bottom: 1ch;">cherry blossom terminal 0.1.0\nType \'help\' for help.'
+                        writeLines(info_text)
+                    }
+
+                    return [result, is_ok]
+                }
+
+                function cmdHelp(args) {
+                    let result = ''
+                    let is_ok = true
+
+                    if (args.length <= 0) {
+                        // Print general help:
+                        writeln('---[help]---')
+                        writeln('help &lt;command&gt; (get command-specific help)')
+                        writeln('about (show system info)')
+                        writeln('echo &lt;text&gt; [additional text] (print text to screen)')
+                        writeln('clear (clear the screen)')
+                        writeln('ls (list files in current directory)')
+                        writeln('cd &lt;directory path | .. | .&gt; (switch directory)')
+                        writeln('mkdir &lt;directory path&gt; [more directory paths] (create directories)')
+                        writeln('pwd (show current working directory)')
+                        writeln('cat &lt;file path&gt; (show file contents)')
+                        writeln()
+                        writeln("Separate multiple commands with semicolons, ie. 'print hello,; print world!'")
+                        writeln("Enclose arguments with spaces in quotes, ie. 'print \"hello, world!\"'")
+                    } else if (args.length > 1) {
+                        result = 'too many arguments (expected up to 1)'
+                        is_ok = false
+                    } else {
+                        // Print command-specific help:
+                        if (args[0] === 'help') {
+                            writeln('---[help]---')
+                            writeln('Shows help text.')
+                            writeln()
+                            writeln('syntax:')
+                            writeln('\thelp [command]')
+                            writeln()
+                            writeln('example:')
+                            writeln('\thelp echo')
+                        } else if (args[0] === 'about') {
+                            writeln('---[about]---')
+                            writeln('Shows system info')
+                            writeln()
+                            writeln('syntax:')
+                            writeln('\tabout')
+                            writeln()
+                            writeln('example:')
+                            writeln('\tabout')
+                        } else if (args[0] === 'echo') {
+                            writeln('---[echo]---')
+                            writeln('Prints text to the output.')
+                            writeln()
+                            writeln('syntax:')
+                            writeln('\techo &lt;text&gt; [additional text]')
+                            writeln()
+                            writeln('example:')
+                            writeln('\techo hello, world!')
+                        } else if (args[0] === 'echo') {
+                            writeln('---[echo]---')
+                            writeln('Prints text to the output.')
+                            writeln()
+                            writeln('syntax:')
+                            writeln('\techo &lt;text&gt; [additional text]')
+                            writeln()
+                            writeln('example:')
+                            writeln('\techo hello, world!')
+                        } else if (args[0] === 'clear') {
+                            writeln('---[clear]---')
+                            writeln('Clears the screen.')
+                            writeln()
+                            writeln('syntax:')
+                            writeln('\tclear')
+                            writeln()
+                            writeln('example:')
+                            writeln('\tclear')
+                        } else if (args[0] === 'ls') {
+                            writeln('---[ls]---')
+                            writeln('Lists the contents of the specified directory, or the current directory if unspecified.')
+                            writeln()
+                            writeln('syntax:')
+                            writeln('\tls [directory path]')
+                            writeln()
+                            writeln('example:')
+                            writeln('\tls /home')
+                        } else if (args[0] === 'cd') {
+                            writeln('---[cd]---')
+                            writeln('Sets your current directory to the specified one.')
+                            writeln()
+                            writeln('syntax:')
+                            writeln('\tcd &lt;directory path | .. | .&gt;')
+                            writeln()
+                            writeln('example:')
+                            writeln('\tcd /home')
+                        } else if (args[0] === 'pwd') {
+                            writeln('---[pwd]---')
+                            writeln('Shows the path of your current directory.')
+                            writeln()
+                            writeln('syntax:')
+                            writeln('\tpwd')
+                            writeln()
+                            writeln('example:')
+                            writeln('\tpwd')
+                        } else if (args[0] === 'mkdir') {
+                            writeln('---[mkdir]---')
+                            writeln('Creates directories if they do not already exist.')
+                            writeln()
+                            writeln('syntax:')
+                            writeln('\tmkdir &lt;directory path&gt; [more directory paths]')
+                            writeln()
+                            writeln('example:')
+                            writeln('\tmkdir /home/test /home/test2')
+                        } else if (args[0] === 'cat') {
+                            writeln('---[cat]---')
+                            writeln('Shows the contents of a file.')
+                            writeln()
+                            writeln('syntax:')
+                            writeln('\tcat &lt;file path&gt;')
+                            writeln()
+                            writeln('example:')
+                            writeln('\tcat readme.md')
+                        } else {
+                            result = "no help available for '" + args[0] + "'"
+                            is_ok = false
+                        }
+                    }
+
+                    return [result, is_ok]
+                }
+
+                function cmdEcho(args) {
+                    let result = ''
+                    let is_ok = true
+
+                    if (args.length <= 0) {
+                        result = 'not enough arguments (expected at least 1)'
+                        is_ok = false
+                    } else {
+                        for (let idx = 0; idx < args.length; idx++) {
+                            writeln(args[idx])
+                        }
+                    }
+
+                    return [result, is_ok]
+                }
+
+                function cmdClear(args) {
+                    let result = ''
+                    let is_ok = true
+
+                    if (args.length > 0) {
+                        result = 'too many arguments (expected 0)'
+                        is_ok = false
+                    } else {
+                        output.innerHTML = ''
+                    }
+
+                    return [result, is_ok]
+                }
+
+                function cmdLs(args) {
+                    let result = ''
+                    let is_ok = true
+
+                    if (args.length <= 0) {
+                        for (let idx_child = 0; idx_child < pwd.children.length; idx_child++) {
+                            let fileitem = pwd.children[idx_child]
+                            if (fileitem instanceof Directory) {
+                                writeln(fileitem.name + ' (directory)')
+                            } else if (fileitem instanceof File) {
+                                writeln(fileitem.name)
+                            }
+                        }
+                    } else if (args.length == 1) {
+                        let target_dir = getFileItem(args[0])
+
+                        if (target_dir instanceof Directory) {
+                            for (let idx_child = 0; idx_child < target_dir.children.length; idx_child++) {
+                                let fileitem = target_dir.children[idx_child]
+                                if (fileitem instanceof Directory) {
+                                    writeln(fileitem.name + ' (directory)')
+                                } else if (fileitem instanceof File) {
+                                    writeln(fileitem.name)
+                                }
+                            }
+                        } else {
+                            result = "directory '" + args[0] + "' does not exist"
+                            is_ok = false
+                        }
+                    }
+
+                    return [result, is_ok]
+                }
+
+                function cmdCd(args) {
+                    let result = ''
+                    let is_ok = true
+
+                    if (args.length <= 0) {
+                        result = 'not enough arguments (expected 1)'
+                        is_ok = false
+                    } else if (args.length > 1) {
+                        result = 'too many arguments (expected 1)'
+                        is_ok = false
+                    } else {
+                        let target_dir = getFileItem(args[0])
+                        if (target_dir) {
+                            if (target_dir instanceof Directory) {
+                                pwd = target_dir
+
+                                prompt_decorator.innerHTML = getFullPath(pwd) + '&gt;&nbsp;'
+
+                            } else {
+                                result = "'" + args[0] + "' is not a directory"
+                                is_ok = false
+                            }
+                        } else {
+                            result = "directory '" + args[0] + "' does not exist"
+                            is_ok = false
+                        }
+                    }
+
+                    return [result, is_ok]
+                }
+
+                function cmdPwd(args) {
+                    let result = ''
+                    let is_ok = true
+
+                    if (args.length > 0) {
+                        result = 'too many arguments (expected 0)'
+                        is_ok = false
+                    } else {
+                        let path = getFullPath(pwd)
+                        writeln(path)
+                    }
+
+                    return [result, is_ok]
+                }
+
+                function cmdMkdir(args) {
+                    let result = ''
+                    let is_ok = true
+
+                    if (args.length <= 0) {
+                        result = 'not enough arguments (expected at least 1)'
+                        is_ok = false
+                    } else {
+                        for (let idx_arg = 0; idx_arg < args.length; idx_arg++) {
+                            let dir_name = args[idx_arg]
+                            let path_tokens = splitPath(dir_name)
+
+                            let is_token_ok = true
+                            for (let idx_token = 0; idx_token < path_tokens.length; idx_token++) {
+                                let token = path_tokens[idx_token]
+
+                                if (path_tokens[0] === '/') {
+                                    if (token.includes('/') && idx_token !== 0) {
+                                        is_token_ok = false
+                                    }
+                                } else {
+                                    if (token.includes('/')) {
+                                        is_token_ok = false
+                                    }
+                                }
+
+                                if (
+                                    token.length <= 0
+                                    || token.includes('\\')
+                                    || token.includes(':')
+                                    || token.includes('*')
+                                    || token.includes('?')
+                                    || token.includes('"')
+                                    || token.includes('<')
+                                    || token.includes('>')
+                                    || token.includes('|')
+                                    || token === '.'
+                                    || token === '..'
+                                ) {
+                                    is_token_ok = false
+                                }
+                            }
+
+                            if (!is_token_ok) {
+                                result = "'" + dir_name + "' contains an invalid directory name"
+                                is_ok = false
+                            } else {
+                                createDirectories(path_tokens)
+                            }
+                        }
+                    }
+
+                    return [result, is_ok]
+                }
+
+                function cmdCat(args) {
+                    let result = ''
+                    let is_ok = true
+
+                    if (args.length <= 0) {
+                        result = 'not enough arguments (expected 1)'
+                        is_ok = false
+                    } else if (args.length > 1) {
+                        result = 'too many arguments (expected 1)'
+                        is_ok = false
+                    } else {
+                        let target_file = getFileItem(args[0])
+                        if (target_file instanceof File) {
+                            let lines = target_file.contents.split(/\r?\n/);
+                            console.log(lines)
+                            // writeln('<span class="textfile">')
+                            // let text = '<span class="textfile">'
+                            let text = ''
+                            for (let idx_line = 0; idx_line < lines.length; idx_line++) {
+                                let line = lines[idx_line]
+                                // writeln(line)
+                                if (idx_line > 0) {
+                                    text = text + '\n'
+                                }
+                                text = text + line
+                            }
+                            // text = text + '</span>'
+                            // writeln(text)
+                            // writeln('</span>')
+                            writeLines(text)
+                        } else {
+                            result = "'" + args[0] + "' is not a file"
+                            is_ok = false
+                        }
+                    }
+
+                    return [result, is_ok]
+                }
+
+
+
+
+
+                // Interpret commands:
+                function interpret(command, args) {
+                    let result = ''
+                    let is_ok = true
+
+                    // If the command is an alias, get the original command.
+                    // Note that you can have an alias of an alias.
+                    while (command in aliases) {
+                        command = aliases[command]
+                    }
+
+                    if (command === 'about') {
+                        [result, is_ok] = cmdAbout(args)
+                    } else if (command === 'help') {
+                        [result, is_ok] = cmdHelp(args)
+                    } else if (command === 'echo') {
+                        [result, is_ok] = cmdEcho(args)
+                    } else if (command === 'clear') {
+                        [result, is_ok] = cmdClear(args)
+                    } else if (command === 'ls') {
+                        [result, is_ok] = cmdLs(args)
+                    } else if (command === 'cd') {
+                        [result, is_ok] = cmdCd(args)
+                    } else if (command === 'pwd') {
+                        [result, is_ok] = cmdPwd(args)
+                    } else if (command === 'mkdir') {
+                        [result, is_ok] = cmdMkdir(args)
+                    } else if (command === 'cat') {
+                        [result, is_ok] = cmdCat(args)
+                    } else if (isWhiteSpace(command)) {
+                        // Do nothing lmao
+                    } else {
+                        result = "unknown command '" + command + "'"
+                        is_ok = false
+                    }
+
+                    return [result, is_ok]
+                }
+
+                // Handle terminal input:
+                document.getElementById('prompt').addEventListener("submit", function(e) {
+                    e.preventDefault()
+                    
+                    let prompt_decorator_text = prompt_decorator.innerHTML
+                    let prompt_input_text = prompt_input.value
+                    prompt_input.value = ''
+                    // writeln("<span class='bold'>" + prompt_decorator_text + prompt_input_text + "</span>")
+                    writeln('<span class="invert">' + prompt_decorator_text + prompt_input_text + '</span>')
+
+                    
+                    // Lex the input into tokens:
+                    console.log('lexing "' + prompt_input_text + '"...')
+                    let tokens = lex(prompt_input_text)
+                    console.log(tokens)
+
+                    // Parse the tokens into commands:
+                    // JK I'm not doing this lmao
+                    // unless...
+                    console.log('parsing tokens...')
+                    let commands = parse(tokens)
+                    console.log(commands)
+
+                    // Interpret the commands:
+                    console.log('interpreting commands...')
+                    for (let command_idx = 0; command_idx < commands.length; command_idx++) {
+                        let command_tokens = commands[command_idx]
+
+                        let command = command_tokens[0]
+                        let args = command_tokens.slice(1)
+
+                        let [result, is_ok] = interpret(command, args)
+                        if (!is_ok) {
+                            writeError('Command failed (' + result + ')')
+                            break
+                        }
+                    }
+
+                    // Scroll to the bottom of the page:
+                    window.scrollTo(0, document.body.scrollHeight);
+                });
+
+
+            </script>
+        </div>
+    </body>
+</html>
