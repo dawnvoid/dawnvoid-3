@@ -27,13 +27,14 @@ html {
 
 .card {
     /* background-color: var(--nord-1); */
-    background-color: #25242360;
-    background-color: #4c566a80;
-    background-color: #3b425250;
+    /* background-color: #25242360; */
+    /* background-color: #4c566a80; */
+    /* background-color: #3b425250; */
     background-color: #3b425240;
+    background-color: #0005;
     /* background-color: transparent; */
 
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(3px);
     /* filter: blur(3px); */
 
     /* border: 1px solid var(--nord-3); */
@@ -199,8 +200,15 @@ footer {
 .page-bg {
     /* background-image: url(/assets/bg/0064_small.gif); */
     /* background-image: url(/assets/bg/nurple-static-bright.gif); */
-    background-image: url(/assets/bg/stars3.gif);
-    background-repeat: repeat;
+    /* background-image: url(/assets/bg/stars3.gif); */
+    /* background-image: url(/assets/bg/171027.jpg); */
+    /* background-image: url(/assets/bg/L.jpg); */
+    /* background-image: url(/assets/bg/M.jpg); */
+    background-image: url(/assets/bg/N.png);
+    /* background-repeat: repeat; */
+    /* background-repeat: no-repeat; */
+    background-position: center;
+    /* background-size: contain; */
     opacity: 0.5;
     /* opacity: 1; */
 
