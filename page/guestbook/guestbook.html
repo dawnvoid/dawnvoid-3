@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="/lib/reset.css">
+        <!-- <link rel="stylesheet" href="/lib/colors.css"> -->
+        <link rel="stylesheet" href="/theme.css">
+        <link rel="stylesheet" href="guestbook.css">
+
+        <title>Document</title>
+        
+        <!-- <style>
+
+            #HCB_comment_box, #HCB_comment_box * {
+                
+            }
+            #HCB_comment_box, #HCB_comment_box * {
+                border: none !important;
+                outline: none !important;
+                
+                font-family: 'Courier New', Courier, monospace !important;
+                font-size: 1rem !important;
+                
+                display: initial !important;
+                position: initial !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: auto !important;
+                height: auto !important;
+                max-width: none !important;
+                max-height: none !important;
+                float: none !important;
+                clear: none !important;
+            }
+            #HCB_comment_box style {
+                display: none !important;
+            }
+
+            /* "Comments" title */
+            #HCB_comment_box h3 {
+                display: none !important;
+            }
+
+            /* Username textbox */
+            #HCB_comment_box #hcb_form_name {
+                color: inherit !important;
+                background-color: transparent !important;
+
+                /* font-family: inherit !important; */
+                display: block !important;
+                height: 2rem !important;
+                width: 100% !important;
+                text-align: center;
+            }
+
+            /* Comment textbox */
+            #HCB_comment_box #hcb_form_content {
+                color: inherit !important;
+                background-color: transparent !important;
+
+                /* font-family: inherit !important; */
+                /* width: auto !important; */
+                display: block !important;
+                height: 5rem !important;
+                width: 100% !important;
+                /* vertical-align: bottom !important; */
+                resize: none !important;
+                padding: 0 1ch !important;
+            }
+
+            /* Submit button */
+            #HCB_comment_box #HCB_comment_form_box #hcb_submit {
+                color: palevioletred !important;
+                background-color: transparent !important;
+                border: 1px solid palevioletred !important;
+
+                height: 2rem !important;
+                width: 100% !important;
+                padding: 0 1ch !important;
+            }
+            #HCB_comment_box #HCB_comment_form_box #hcb_submit:hover {
+                color: white !important;
+                background-color: palevioletred !important;
+                border: 1px solid palevioletred !important;
+            }
+
+            /* Image upload button */
+            #HCB_comment_box #HCB_comment_form_box .inputfile {
+                display: none !important;
+                width: 0 !important;
+            }
+
+            /* Settings button */
+            #HCB_comment_box #HCB_comment_form_box #hcb_settings {
+                display: none !important;   
+            }
+            #HCB_comment_box #HCB_comment_form_box #hcb_settings .hcb-icon {
+                display: none !important;
+            }
+
+            /* "Email me replies" checkbox */
+            #HCB_comment_box #hcb_subscribe {
+                display: none !important;
+            }
+
+            /* "Not using HTML Comment Box yet?" nag message */
+            #HCB_comment_box .home-desc {
+                display: none !important;
+            }
+
+            /* Admin link */
+            #HCB_comment_box .admin-link {
+                display: none !important;
+            }
+
+            /* .hcb-shadow-t, .hcb-shadow-b, .hcb-shadow-clear {
+                display: none !important;
+            } */
+
+            #HCB_comment_box #comments_list {
+                display: block !important;
+            }
+            #HCB_comment_box #comments_list .comment {
+                display: block !important;
+            }
+            
+            /* Comment username */
+            #HCB_comment_box #comments_list .comment .author-name {
+                /* color: red; */
+                color: white;
+            }
+            #HCB_comment_box #comments_list .comment .author-name::before {
+                /* content: "[ "; */
+            }
+            #HCB_comment_box #comments_list .comment .author-name::after {
+                /* content: "] "; */
+            }
+
+            /* Comment date */
+            #HCB_comment_box #comments_list .comment .date {
+                display: none !important;
+            }
+            
+            /* Comment text */
+            #HCB_comment_box #comments_list .comment .hcb-comment-body {
+                
+            }
+            
+            /* Delete comment button */
+            #HCB_comment_box #comments_list .comment .hcb-link {
+                /* display: none !important; */
+            }
+            #HCB_comment_box #comments_list .comment .hcb-link::before {
+                content: "[x]"
+            }
+            #HCB_comment_box #comments_list .comment .hcb-link:hover {
+                color: red;
+            }
+            #HCB_comment_box #comments_list .comment .hcb-link .hcb-icon {
+                display: none !important;
+            }
+
+            /* Reply button */
+            #HCB_comment_box #comments_list .comment .hcb-reply {
+                display: none !important;
+            }
+            
+            /* FLag button */
+            #HCB_comment_box #comments_list .comment .hcb-flag {
+                display: none !important;
+            }
+
+            /* RSS feed button */
+            #HCB_comment_box > a {
+                display: none !important;
+            }
+
+            /* "Showing x to y" button */
+            #HCB_comment_box > p:not(#hcb_msg) {
+                /* Can't get this to center :( */
+            }
+
+            /* "Thank you for commenting!" text */
+            #HCB_comment_box #hcb_msg {
+                display: block !important;
+                text-align: center !important;
+            }
+
+            #HCB_comment_box #HCB_comment_form_box .btn-secondary {
+                color: palevioletred !important;
+                background-color: transparent !important;
+                border: 1px solid palevioletred !important;
+
+                display: block !important;
+                height: 2rem !important;
+                width: 100% !important;
+            }
+            #HCB_comment_box #HCB_comment_form_box .btn-secondary:hover {
+                color: white !important;
+                background-color: palevioletred !important;
+                border: 1px solid palevioletred !important;
+            }
+
+
+
+        </style>-->
+    </head>
+    <body>
+        <div class="page-bg"></div>
+
+        <div class="content">
+            <div class="card fade-in" style="width: auto;">
+                <div class="card-bg">
+
+                    <nav class="fade-in" style="animation-delay: 0.3s;">
+                        <a href="/">..</a>
+                    </nav>
+                    
+                    <!-- begin wwww.htmlcommentbox.com -->
+                    <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">Comment Box</a> is loading comments...</div>
+                    <!-- <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" /> -->
+                    <script type="text/javascript" id="hcb">
+
+                        // Seems to do "https://www.htmlcommentbox.com/jread?page=http%3A%2F%2F127.0.0.1%3A5500%2Fpage%2Fguestbook%2Fguestbook.html&mod=%241%24wq1rdBcg%24.%2FH9glyYZGZP2iu0XpZ8h%2F&opts=16798&num=10&ts=1658870819546"
+
+                        let mod_field = "&mod=%241%24wq1rdBcg%24.%2FH9glyYZGZP2iu0XpZ8h%2F" // ID of the moderator user.
+                        // mod_field = ''
+                        let options_field = "&opts=16798" // Unknown, probably some kind of options flags.
+                        options_field = "16798"
+                        // options_field = '10001'
+                        let num_field = "&num=10" // Number of messages to show per page.
+                        // num_field = ''
+                        let ts_field = "&ts=1658870819546" // Unknown, probably some kind of timestamp.
+                        // ts_field = ''
+
+
+                        if (!window.hcb_user) {
+                            hcb_user={};
+                        }
+                        (function() {
+                            var s=document.createElement("script"),
+                            l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"),
+                            h="https://www.htmlcommentbox.com";
+                            s.setAttribute("type","text/javascript");
+                            // s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%24.%2FH9glyYZGZP2iu0XpZ8h%2F"+"&opts=16798&num=10&ts=1658870819546");
+                            s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+ mod_field + options_field + num_field + ts_field);
+                            if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);
+                        })();
+
+
+                        // let url = "https://www.htmlcommentbox.com/jread?page=http%3A%2F%2F127.0.0.1%3A5500%2Fpage%2Fguestbook%2Fguestbook.html&mod=%241%24wq1rdBcg%24.%2FH9glyYZGZP2iu0XpZ8h%2F&opts=16798&num=10&ts=1658870819546"
+                        // let response = await fetch(url);
+
+                        // if (response.ok) { // if HTTP-status is 200-299
+                        //     // get the response body (the method explained below)
+                        //     // let json = await response.json();
+                        //     console.log(response.text())
+                        // } else {
+                        //     alert("HTTP-Error: " + response.status);
+                        // }
+
+
+
+                    </script>
+                    <!-- end www.htmlcommentbox.com -->
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
