@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
         
         <title>ℂ𝕙𝕖𝕣𝕣𝕪 𝔹𝕝𝕠𝕤𝕤𝕠𝕞</title>
 
@@ -13,7 +15,7 @@
                 color: palevioletred;
                 background-color: black;
     
-                font-family: 'Inconsolata', 'Courier New', Courier, monospace;
+                font-family: 'Consolas', 'Inconsolata', 'Courier New', Courier, monospace;
             }
 
             body {
@@ -152,6 +154,10 @@
                 background-color: palevioletred;
             }
 
+            #output img {
+                max-width: 100%;
+            }
+
 
 
             #prompt {
@@ -269,6 +275,21 @@
                 let lorem_txt_file = dawn_dir.create_file('lorem.txt',
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
                 )
+                let cvwxiepwkd_gif_file = mnt_dir.create_file('cvwxiepwkd.gif', '/assets/puzzle/cvwxiepwkd.gif')
+                let zero_png_file = mnt_dir.create_file('0.png', '/assets/puzzle/0.png')
+                let one_txt_file = mnt_dir.create_file('1.txt',
+                    '##########'
+                    + '\n  ##   # #'
+                    + '\n# ### ## #'
+                    + '\n# #   #  #'
+                    + '\n#   ### ##'
+                    + '\n## ##    #'
+                    + '\n#  #  # ##'
+                    + '\n## # ## ##'
+                    + '\n#    ##   '
+                    + '\n##########'
+                )
+                let one_png_file = mnt_dir.create_file('1.png', '/assets/puzzle/1.png')
                 let pwd = root_dir
 
                 function enterDirectory(target_dir) {
@@ -470,7 +491,7 @@
                 }
 
                 function writeLines(str='') {
-                    str = str.replace('\n', '<br>')
+                    str = str.replaceAll('\n', '<br>')
                     writeln(str)
                 }
 
@@ -606,6 +627,7 @@
                         writeln('mkdir &lt;directory path&gt; [more directory paths] (create directories)')
                         writeln('pwd (show current working directory)')
                         writeln('cat &lt;file path&gt; (show file contents)')
+                        writeln('render &lt;image file path&gt; [additional images] (draw image to screen)')
                         writeln()
                         writeln("Separate multiple commands with semicolons, ie. 'print hello,; print world!'")
                         writeln("Enclose arguments with spaces in quotes, ie. 'print \"hello, world!\"'")
@@ -704,6 +726,15 @@
                             writeln()
                             writeln('example:')
                             writeln('\tcat readme.md')
+                        } else if (args[0] === 'render') {
+                            writeln('---[render]---')
+                            writeln('Draws image files to the screen.')
+                            writeln()
+                            writeln('syntax:')
+                            writeln('\trender &lt;image file path&gt; [more images]')
+                            writeln()
+                            writeln('example:')
+                            writeln('\trender images/background.png')
                         } else {
                             result = "no help available for '" + args[0] + "'"
                             is_ok = false
@@ -891,22 +922,19 @@
                     } else {
                         let target_file = getFileItem(args[0])
                         if (target_file instanceof File) {
-                            let lines = target_file.contents.split(/\r?\n/);
-                            console.log(lines)
-                            // writeln('<span class="textfile">')
-                            // let text = '<span class="textfile">'
-                            let text = ''
-                            for (let idx_line = 0; idx_line < lines.length; idx_line++) {
-                                let line = lines[idx_line]
-                                // writeln(line)
-                                if (idx_line > 0) {
-                                    text = text + '\n'
-                                }
-                                text = text + line
-                            }
-                            // text = text + '</span>'
-                            // writeln(text)
-                            // writeln('</span>')
+                            // let lines = target_file.contents.split(/\r?\n/);
+                            // console.log(lines)
+                            // let text = ''
+                            // for (let idx_line = 0; idx_line < lines.length; idx_line++) {
+                            //     let line = lines[idx_line]
+                            //     // writeln(line)
+                            //     if (idx_line > 0) {
+                            //         text = text + '\n'
+                            //     }
+                            //     text = text + line
+                            // }
+                            let text = target_file.contents
+                            text = text.replaceAll(' ', '&nbsp;')
                             writeLines(text)
                         } else {
                             result = "'" + args[0] + "' is not a file"
@@ -917,7 +945,30 @@
                     return [result, is_ok]
                 }
 
+                function cmdRender(args) {
+                    let result = ''
+                    let is_ok = true
 
+                    if (args.length <= 0) {
+                        result = 'not enough arguments (expected 1'
+                        is_ok = false
+                    } else {
+                        for (let idx_arg = 0; idx_arg < args.length; idx_arg++) {
+                            let arg = args[idx_arg]
+
+                            let target_file = getFileItem(arg)
+                            if (target_file instanceof File) {
+                                let src = target_file.contents
+                                writeln('<img src="' + src + '" style="margin-top: 1ch; margin-bottom: 1ch;">')
+                            } else {
+                                result = "file '" + arg + "' does not exist"
+                                is_ok = false
+                            }
+                        }
+                    }
+
+                    return [result, is_ok]
+                }
 
 
 
@@ -950,6 +1001,8 @@
                         [result, is_ok] = cmdMkdir(args)
                     } else if (command === 'cat') {
                         [result, is_ok] = cmdCat(args)
+                    } else if (command === 'render') {
+                        [result, is_ok] = cmdRender(args)
                     } else if (isWhiteSpace(command)) {
                         // Do nothing lmao
                     } else {
