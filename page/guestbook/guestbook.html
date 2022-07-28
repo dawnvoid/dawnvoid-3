@@ -10,7 +10,13 @@
         <link rel="stylesheet" href="/theme.css">
         <link rel="stylesheet" href="guestbook.css">
 
-        <title>Document</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
+
+        <title>&nbsp;</title>
+
+        <!--
+            Sorry but the code on this page is so bad holy shit.
+        -->
         
         <!-- <style>
 
@@ -207,6 +213,156 @@
 
 
         </style>-->
+        <style>
+            #HCB_comment_box #HCB_comment_form_box {
+                padding: 0 !important;
+            }
+            #HCB_comment_box #HCB_comment_form_box .btn {
+                color: palevioletred !important;
+                background-color: transparent !important;
+                border: 1px solid palevioletred !important;
+                width: 100%;
+                cursor: pointer;
+            }
+            #HCB_comment_box #HCB_comment_form_box .btn:hover {
+                color: white !important;
+                background-color: palevioletred !important;
+            }
+
+            #HCB_comment_box, #HCB_comment_box * {
+                border: none !important;
+                outline: none !important;
+                
+                /* font-family: 'Courier New', Courier, monospace !important; */
+                font-family: inherit !important;
+                font-size: 1rem !important;
+            }
+            #HCB_comment_box style {
+                display: none !important;
+            }
+
+            /* "Comments" title */
+            #HCB_comment_box h3 {
+                display: none !important;
+            }
+
+            #HCB_comment_box #comments_list {
+                display: block !important;
+            }
+            #HCB_comment_box #comments_list .comment {
+                display: block !important;
+                /* border-left: 1px solid palevioletred !important;
+                padding-left: 1ch !important; */
+                margin-bottom: 1ch !important;
+            }
+
+            /* Username textbox */
+            #HCB_comment_box #hcb_form_name {
+                color: gray !important;
+                background-color: transparent !important;
+                border: 1px solid gray !important;
+                outline: none !important;
+
+                /* font-family: inherit !important; */
+                display: block !important;
+                height: 2rem !important;
+                width: 100% !important;
+                text-align: center;
+            }
+
+            /* Comment textbox */
+            #HCB_comment_box #hcb_form_content {
+                color: gray !important;
+                background-color: transparent !important;
+                border: 1px solid gray !important;
+                outline: none !important;
+
+                /* font-family: inherit !important; */
+                /* width: auto !important; */
+                display: block !important;
+                height: 5rem !important;
+                width: 100% !important;
+                /* vertical-align: bottom !important; */
+                resize: none !important;
+                padding: 0 1ch !important;
+            }
+
+            /* "Not using HTML Comment Box yet?" nag message */
+            #HCB_comment_box .home-desc {
+                display: none !important;
+            }
+
+            /* Submit button */
+            #HCB_comment_box #HCB_comment_form_box #hcb_submit {
+                color: palevioletred !important;
+                background-color: transparent !important;
+                border: 1px solid palevioletred !important;
+                
+                height: 2rem !important;
+                width: 100% !important;
+                padding: 0 1ch !important;
+            }
+            #HCB_comment_box #HCB_comment_form_box #hcb_submit:hover {
+                color: white !important;
+                background-color: palevioletred !important;
+                border: 1px solid palevioletred !important;
+            }
+
+            /* Image upload button */
+            #HCB_comment_box #HCB_comment_form_box .inputfile {
+                /* display: none !important; */
+                /* width: 0 !important; */
+            }
+
+            #HCB_comment_box #HCB_comment_form_box #hcb_file_label {
+                /* color: palevioletred !important;
+                background-color: transparent !important;
+                border: 1px solid palevioletred !important;
+
+                display: flex !important;
+                justify-content: center;
+                align-items: center;
+                height: 2rem !important;
+                width: 100% !important;
+                padding: 0 !important; */
+                display: none !important;
+            }
+            #HCB_comment_box #HCB_comment_form_box #hcb_file_label:hover {
+                /* color: white !important;
+                background-color: palevioletred !important; */
+            }
+
+            #HCB_comment_box #HCB_comment_form_box #hcb_file_label .btn {
+                /* color: inherit !important;
+                background-color: inherit !important;
+                border: none; */
+                /* display: block !important;
+                height: auto !important;
+                width: auto !important;
+                margin: 0 !important;
+                padding: 0 !important; */
+            }
+
+            /* FLag button */
+            #HCB_comment_box #comments_list .comment .hcb-flag {
+                display: none !important;
+            }
+
+            /* RSS feed button */
+            #HCB_comment_box > a {
+                display: none !important;
+            }
+
+            /* Reply button */
+            #HCB_comment_box #comments_list .comment .hcb-reply {
+                display: none !important;
+            }
+
+            /* "Email me replies" checkbox */
+            #HCB_comment_box #hcb_subscribe {
+                display: none !important;
+            }
+        </style>
     </head>
     <body>
         <div class="page-bg"></div>
@@ -215,12 +371,14 @@
             <div class="card fade-in" style="width: auto;">
                 <div class="card-bg">
 
-                    <nav class="fade-in" style="animation-delay: 0.3s;">
+                    <h1 class="fade-in" style="animation-delay: 0.1s;">&lceil; Guestbook &rfloor;</h1>
+
+                    <nav class="fade-in" style="animation-delay: 0.2s;">
                         <a href="/">..</a>
                     </nav>
                     
                     <!-- begin wwww.htmlcommentbox.com -->
-                    <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">Comment Box</a> is loading comments...</div>
+                    <div id="HCB_comment_box" class="fade-in" style="animation-delay: 0.3s;"><a href="http://www.htmlcommentbox.com">Comment Box</a> is loading comments...</div>
                     <!-- <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" /> -->
                     <script type="text/javascript" id="hcb">
 
@@ -229,7 +387,7 @@
                         let mod_field = "&mod=%241%24wq1rdBcg%24.%2FH9glyYZGZP2iu0XpZ8h%2F" // ID of the moderator user.
                         // mod_field = ''
                         let options_field = "&opts=16798" // Unknown, probably some kind of options flags.
-                        options_field = "16798"
+                        // options_field = "16798"
                         // options_field = '10001'
                         let num_field = "&num=10" // Number of messages to show per page.
                         // num_field = ''
