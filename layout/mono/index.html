@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--
+            Link external stylesheets here.
+            If you want to use a css reset (such as https://piccalil.li/blog/a-modern-css-reset/), download and link it here too.
+        -->
+        <link rel="stylesheet" href="mono.css">
+
+        <title>Title that shows up in your browser tab</title>
+
+        <!--
+            You can also declare styles here.
+            The styles are declared here to make things easier to understand, but you can move them to an external stylesheet.
+        -->
+        <style>
+
+            /*
+                A lot of browsers have default page margins/padding, so even if you don't use a css reset, it's useful to reset it.
+            */
+            body {
+                background-image: url(bg.jpg);
+                background-position: center;
+                background-size: cover;
+
+                margin: 0;
+                padding: 0; /* I want the background to peek through the edges. */
+
+                font-family: sans-serif;
+            }
+
+            .main-column {
+                margin: 0 auto; /* Setting the left and right margins to 'auto' on an element that displays as block (ie. divs) will center it horizontally. */
+                max-width: 720px; /* If we set the width explicitly using 'width: 720px;', the main column wouldn't shrink on small screens. */
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            nav {
+                
+            }
+            nav ul {
+                list-style: none;
+                padding: 0;
+
+                text-align: center;
+            }
+            nav ul li {
+                display: inline-block;
+            }
+
+            .card {
+                border: 1px solid;
+
+                margin: 5px;
+                padding: 5px;
+            }
+            .card h2 {
+                text-align: center;
+            }
+
+            .title-box {
+                color: black;
+                background-color: paleturquoise;
+            }
+
+            .post {
+                color: black;
+                background-color: palegoldenrod;
+
+                text-align: justify;
+            }
+
+            .post.two-column {
+                columns: 2;
+            }
+            .post.two-column h2 {
+                column-span: all;
+            }
+            .post.two-column p:first-of-type { /* First paragraph in a multi-column layout has an ugly margin on the top. Reset that. */
+                margin-top: 0;
+            }
+
+            .footer-box {
+                color: black;
+                background-color: palevioletred;
+
+                text-align: center;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="page-bg"></div>
+        
+        <div class="main-column">
+
+            <section class="card title-box">
+                <h1>This is a Header!</h1>
+
+                <!--
+                    You should enclose your navigation links in <nav> so blind people's screen readers can read your site easier.
+                -->
+                <nav>
+                    <ul>
+                        <li><a href="https://neocities.org">Neocities</a></li>
+                        <li><a href="">Link 2</a></li>
+                        <li><a href="">Link 3</a></li>
+                    </ul>
+                </nav>
+            </section>
+            
+
+            <section class="card post">
+                <h2>Blogpost or something idk</h2>
+                <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus nisi cumque reiciendis? Quas, in! Beatae dicta atque, saepe vel repellat porro quod praesentium recusandae fugit magnam quis facere nihil obcaecati.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus sint, animi quae natus mollitia voluptatibus, molestiae repudiandae itaque consequuntur, perspiciatis eveniet atque totam minima! Eum maxime numquam autem magnam illum.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis pariatur corporis minima natus magni illum, aut quam iure vitae alias voluptas placeat. Ullam quis error aut explicabo deserunt, nulla impedit.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam voluptate velit voluptas. Unde minus neque impedit saepe quisquam totam sed ratione dignissimos, cum fugiat dolore quos. Veniam saepe aliquid totam.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi unde dolor earum hic quisquam nihil repudiandae vitae est at accusantium assumenda nisi soluta harum, iure cumque, aperiam laborum nostrum placeat.
+                </p>
+                <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus fuga, doloremque excepturi iusto beatae amet eaque, nihil sunt, minus maxime expedita numquam earum porro officiis! Blanditiis aliquam repudiandae consequatur minus.
+                </p>
+            </section>
+
+            <section class="card post two-column">
+                <h2>Another blog post or something?</h2>
+                <p>
+                    This time with 2 columns!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus ipsum ea enim minima neque, adipisci et odio iusto cupiditate. Ipsum esse ab eos, odio et corporis similique sequi fugit ex!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, corporis consequuntur? Ex maxime ipsam similique, expedita cum quae provident esse vel quasi nostrum eveniet facilis autem harum veniam quis. Vel!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo veniam officiis non nihil reprehenderit itaque, natus neque, blanditiis laudantium placeat eaque iste voluptates quis quam fuga ipsam. Excepturi, nisi tempore!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione ipsam, at vitae tempora, beatae natus voluptatum reiciendis nostrum cupiditate possimus laudantium maiores consequatur odio, delectus saepe cumque! Sequi, quae rem.
+                </p>
+                <p>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. In consequuntur nisi voluptatum! Illum quibusdam adipisci et voluptates earum, debitis asperiores ipsum, accusamus, eveniet ea esse! Soluta provident a dolor distinctio?
+                </p>
+                <p>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi modi fugit iste eum ab doloremque saepe? Fugiat dicta incidunt, illum quia, est molestiae, consequuntur repellendus ipsum dignissimos doloremque at! Enim!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident officia adipisci laborum. Aliquid ipsum culpa laboriosam totam sequi quisquam numquam officia, quidem accusamus id alias, ut quae, in voluptates voluptatem.
+                </p>
+            </section>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin: 5px;">
+                <section class="card post" style="flex: 1 1 200px; margin: 0;">
+                    <h2>Left side</h2>
+                    <p>
+                        Try resizing your window! The layout should change to fit mobile screens.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum, eligendi magnam quis ducimus facere veritatis provident enim officiis ullam ea. Totam distinctio facere molestiae a? Repellendus optio quibusdam nisi debitis!
+                    </p>
+                </section>
+                
+                <section class="card post" style="flex: 1 1 200px; margin: 0;">
+                    <h2>Right side</h2>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio laboriosam doloremque atque enim porro itaque inventore eligendi! Corporis praesentium autem vero reprehenderit officiis fugit, nostrum, commodi quam eaque voluptas doloremque.
+                    </p>
+                </section>
+            </div>
+
+            <footer class="card footer-box">
+                &copy; your mom 2049
+            </footer>
+
+        </div>
+        
+    </body>
+</html>
