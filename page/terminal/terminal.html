@@ -223,7 +223,7 @@
             
             <div id="output">
                 <img src="cherry_blossom_branch.png" style="float: right; max-width: 50%; margin-left: 1ch; margin-bottom: 1ch;">
-                cherry blossom terminal 0.1.0
+                cherry blossom 1.0.0
                 <br>Type 'help' for help.
             </div>
             
@@ -290,6 +290,10 @@
                     + '\n##########'
                 )
                 let one_png_file = mnt_dir.create_file('1.png', '/assets/puzzle/1.png')
+                let two_gif_file = mnt_dir.create_file('2.gif', '/assets/puzzle/2.gif')
+                let three_png_file = mnt_dir.create_file('3.png', '/assets/puzzle/3.png')
+                let a_gif_file = mnt_dir.create_file('a.gif', '/assets/puzzle/a.gif')
+                let b_gif_file = mnt_dir.create_file('b.gif', '/assets/puzzle/b.gif')
                 let pwd = root_dir
 
                 function enterDirectory(target_dir) {
@@ -604,7 +608,7 @@
                     // interpret('clear', []) // Commands can call other commands!
 
                     if (is_ok) {
-                        let info_text = '<img src="cherry_blossom_branch.png" style="float: right; max-width: 50%; margin-left: 1ch; margin-bottom: 1ch;">cherry blossom terminal 0.1.0\nType \'help\' for help.'
+                        let info_text = '<img src="cherry_blossom_branch.png" style="float: right; max-width: 50%; margin-left: 1ch; margin-bottom: 1ch;">cherry blossom 1.0.0\nType \'help\' for help.'
                         writeLines(info_text)
                     }
 
