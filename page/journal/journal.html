@@ -79,9 +79,20 @@
                 margin-top: 2rem;
             }
             h2 {
+                /* background-color: goldenrod; */
+                /* color: black; */
+                
                 font-weight: bold;
-    
+                
                 margin-top: 2rem;
+                /* display: inline-block; */
+                /* padding: 0 1ch; */
+            }
+            h2:before {
+                content: "[ ";
+            }
+            h2:after {
+                content: " ]";
             }
     
             .cursor {
@@ -97,9 +108,16 @@
                 list-style-type: decimal;
                 list-style-position: inside;
             } */
-    
+            ul {
+                list-style-type: disc;
+                list-style-position: outside;
+            }
+            ul li {
+                margin-left: 2ch;
+            }
+
             ul li::before {
-                content: "- ";
+                /* content: "- " */
             }
     
             table {
@@ -127,6 +145,21 @@
             p {
                 margin-bottom: 1rem;
             }
+
+            details {
+
+            }
+            details summary {
+
+            }
+            details summary > * {
+                display: inline-block;
+
+                cursor: pointer;
+            }
+            details > *:not(summary) {
+                margin-left: 2ch;
+            }
     
         </style>
     </head>
@@ -135,19 +168,20 @@
         <div id="crt"></div>
         <div id="scanlines"></div>
 
-        <nav>
+        <nav style="text-align: center;">
             <a href="/">..</a>
         </nav>
 
-        <img src="/assets/angel.gif" style="border: 1px solid; float: right;">
+        <img src="/assets/illuminated.png" style="margin: 2rem auto;">
 
-        <h1>Journal</h1>
-        <p>
+        <h1 style="text-align: center;">Journal</h1>
+        <p style="text-align: center;">
             Random shit. Newest first. Rough and unpolished forever.
         </p>
 
         <h2>Index</h2>
         <ol reversed >
+            <li><a href="#12">Resources</a></li>
             <li><a href="#11">Thoughts on Newbie Sites</a></li>
             <li><a href="#10">Dirt Simple TTRPG</a></li>
             <li><a href="#9">Double RPS</a></li>
@@ -161,293 +195,469 @@
             <li><a href="#1">Black Planet</a></li>
         </ol>
 
-        <h2 id="11">Thoughts on Newbie Sites</h2>
-        <p>
-            2022-07-25
-        </p>
-        <p>
-            Some people complain about neocities sites that have almost no content. I kind of get it? Seeing "Hi I'm [name] and I like programming", "There's not much here yet", "This site is a work in progress", etc. does get kinda boring after a while. But at the end of the day, I think it's a good thing that they're exploring new territory and learning to program.
-        </p>
-        <p>
-            If you want to see "good" sites, then search them out. If you <i>only</i> want to see those sites, then that's just not how it works :/ I guess you could make something like <a href="https://districts.neocities.org/">districts.neocities</a> if you really want, or hope someone already made one that's acceptable in your eyes.
-        </p>
-        <p>
-            Newbies might be cringe but it's also pretty cringe to treat them like shit. Why be childish and petty on neocities? You could use that energy to do something better for your life...
-        </p>
+        <article id="12">
+            <h2>Resources</h2>
+            <p>Transferred 2022-07-29</p>
+            <p>
+                Copied these over from my previous site. Hopefully someone finds them useful.
+            </p>
+            <details>
+                <summary><h3>Web Dev</h3></summary>
+                <ul>
+                    <li><a href="/lib/grids.css">grids.css</a> - grid layout framework thing. See it in action <a href="/page/playground/playground.html">here</a>.</li>
+                    <li><a href="/lib/colorize.js">colorize.js</a> - make everything a random color. See it in action <a href="/page/playground/playground.html">here</a>.</li>
+                    <li><a href="https://camwiegert.github.io/baffle/">baffle.js</a> - do funny glitch text.</li>
+                    <li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/">A Complete Guide to Grid</a></li>
+                    <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">A Complete Guide to Flexbox</a></li>
+                    <li><a href="https://keeri.place/workshop/flex-layouts.html">Keeri's Flexbox Layouts</a></li>
+                    <li><a href="https://csslayout.io/">CSS Layout</a> - Common gui elements in css.</li>
+                    <li><a href="https://botoxparty.github.io/XP.css/">XP.css</a> - Fake Windows XP dialog boxes.</li>
+                </ul>
+            </details>
+            <details>
+                <summary><h3>Free Software</h3></summary>
+                <ul>
+                    <li><a href="https://mupdf.com/">MuPDF</a> - lightweight minimal pdf reader. No toolbars - maximum screen space. Press f1 to list shortcuts.</li>
+                    <li><a href="https://www.sumatrapdfreader.org/free-pdf-reader">SumatraPDF</a> - another pdf reader. Ugly but has some theme options in the advanced settings.</li>
+                    <li><a href="https://github.com/Tyrrrz/LightBulb">Lightbulb</a> - lightweight <i>f.lux</i> alternative.</li>
+                    <li><a href="https://mpv.io/">mpv</a> - lightweight and fantastic media player. <a href="">My windows setup guide</a>.</li>
+                    <li><a href="https://github.com/jgraph/drawio">draw.io</a> - make flowcharts quickly.</li>
+                    <li><a href="https://www.getpaint.net/">paint.net</a> - rastor image editor, good for quick edits & some pixel art. <a href="#paintdotnet-plugins">My plugins list.</a></li>
+                    <li><a href="https://handbrake.fr/">HandBrake</a> - convert/compress videos.</li>
+                    <li><a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> - updated <i>youtube-dl</i> fork. Download youtube videos from the commandline.</li>
+                    <li><a href="https://www.mediahuman.com/download.html">MediaHuman YouTube to MP3 Convertor</a> - Download music from youtube. Does a decent job of automatically fetching track metadata.</li>
+                    <li><a href="https://natrongithub.github.io/">Natron</a> - foss video compositing software.</li>
+                    <li><a href="https://www.olivevideoeditor.org/">Olive</a> - video editor. Way more stable and performant than <i>Kdenlive</i>. Less features though.</li>
+                    <li><a href="http://startrinity.com/InternetQuality/ContinuousBandwidthTester.aspx">StarTrinityCST</a> - continuous internet speed test. Good for analyzing live adjustments.</li>
+                    <li><a href="https://trenchbroom.github.io/">TrenchBroom</a> - Quake engine level editor. You can make maps in this and import them to Godot.</li>
+                    <li><a href="https://www.veracrypt.fr/en/Home.html">VeraCrypt</a> - foss disk encryption. Supports virtual disk files.</li>
+                    <li><a href="https://typora.io/">Typora</a> - markdown editor. Now paid, but the beta was free if you can get a copy.</li>
+                    <li><a href="https://writemonkey.com/">Writemonkey</a> - minimal text/markdown editor.</li>
+                    <li><a href="https://imageglass.org/">ImageGlass</a> - lightweight minimal image viewer.</li>
+                    <li><a href="https://annystudio.com/software/colorpicker/">Just Color Picker</a> - color picker tool. Get rgb/hex/hsv values from any pixel on your screen.</li>
+                    <li><a href="https://magicseteditor.boards.net/">Magic Set Editor (MSE)</a> - tcg/ccg card editor. Supports custome templates.</li>
+                    <li><a href="https://rclone.org/">RClone</a> - lets you mount your google drive locally.</li>
+                    <li><a href="https://www.softpedia.com/get/PORTABLE-SOFTWARE/System/System-Enhancements/Portable-Symbolic-Link-Creator.shtml">Portable Symbolic Link Creator</a> - GUI for making symbolic links on windows.</li>
+                    <li><a href="https://sourceforge.net/projects/apng2gif/">apng2gif</a> - GUI and commandline tool for converting apng to gif. Use with an apng export plugin for paint.net.</li>
+                    <li><a href="https://imagemagick.org/index.php">apng2gif</a> - Commandline tool for image conversion and manipulation. Can do batch image processing. Convoluted syntax but the internet is your friend.</li>
+                    <li><a href="https://riot-optimizer.com/">RIOT</a> - Optimize the shit out of your images.</li>
+                    <li><a href="http://www.un4seen.com/">XMPlay</a> - Music player. Starts instantly. Tons of skins.</li>
+                </ul>
+            </details>
+            <details>
+                <summary><h3>Obscure Free Software</h3></summary>
+                <ul>
+                    <li><a href="http://www.nicolasfournel.com/?page_id=125">AudioPaint</a> - generate weird sounds from pictures.</li>
+                    <li><a href="https://www.abc.se/~re/Coagula/Coagula.html">Coagula</a> - generate weird sounds from pictures.</li>
+                    <li><a href="http://www.madtracker.org/about.php">MadTracker 2</a> - music tracker. Supports VST stuff.</li>
+                    <li><a href="https://openmpt.org/">OpenMPT</a> - music tracker.</li>
+                    <li><a href="https://codecpack.co/download/Billy.html">Billy</a> - lightweight and minimal music player. Original site is still up, but downloads don't work. You'll need to find a copy elsewhere.</li>
+                    <li><a href="http://quantumelephant.co.uk/bookbinder/bookbinder.html">Bookbinder 3.0</a> - bookbinding program for pdf files. Jank, but it's saved my ass before.</li>
+                    <li><a href="https://jagt.github.io/clumsy/">clumsy</a> - intentionally cause network instability. Fantastic for multiplayer game dev.</li>
+                    <li><a href="http://www.whitsoftdev.com/unfreez/">UnFREEz</a> - lightweight minimal image sequence to gif convertor. Not many options.</li>
+                </ul>
+            </details>
+            <details>
+                <summary><h3>Firefox Extensions</h3></summary>
+                <ul>
+                    <li><a href="https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/">uBlock Origin</a> - widely trusted adblocker. Works wonders.</li>
+                    <li><a href="https://adblockplus.org/">Adblock Plus</a> - another adblocker. Supposedly not as good, but still fantastic.</li>
+                    <li><a href="https://addons.mozilla.org/en-US/firefox/addon/save-all-images-webextension/">Download All Images</a> - lets you browse and save all images loaded in the current tab. Useful if the site blocks right clicks or something. I imagine it'll come in handy for right-clicking NFTs lol.</li>
+                    <li><a href="https://addons.mozilla.org/en-US/firefox/addon/sidebery/">Sidebery</a> - Vertical tabs!</li>
+                    <li><a href="https://pastebin.com/VGk8ACWW">My userchrome.css</a></li>
+                </ul>
+            </details>
+            <details>
+                <summary><h3 id="paintdotnet-plugins">Paint.NET Plugins</h3></summary>
+                <ul>
+                    <li>Animation
+                        <ul>
+                            <li><a href="https://forums.getpaint.net/topic/14848-spritesheet-animation-plugin/">SpriteSheetAnimator</a></li>
+                        </ul>
+                    </li>
+                    <li>Effects
+                        <ul>
+                            <li><a href="https://forums.getpaint.net/topic/22126-psychocolour-in-red-ochre-plugin-pack/">Psychocolor</a></li>
+                        </ul>
+                    </li>
+                    <li>Manipulation
+                        <ul>
+                            <li><a href="https://forums.getpaint.net/topic/112095-align-object/">Align Object</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/32048-boltbaits-plugin-pack-for-pdn-v406-updated-aug-16-2017/">Flip Horizontal</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/32048-boltbaits-plugin-pack-for-pdn-v406-updated-aug-16-2017/">Flip Vertical</a></li>
+                        </ul>
+                    </li>
+                    <li>Background Removal
+                        <ul>
+                            <li><a href="https://forums.getpaint.net/topic/13061-alphaspace/">Alphaspace</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/7767-color-to-alpha-v22-2008-12-24/">Color to Alpha</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/117652-convert-color-deviation-to-alpha-variation-of-a-single-color/">Deviation to Alpha</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/32165-unblend/">Unblend</a></li>
+                        </ul>
+                    </li>
+                    <li>Rendering
+                        <ul>
+                            <li><a href="https://forums.getpaint.net/topic/1964-grid-maker-plugin-v30-updated-july-2-2014/">Grid / Checkerboard</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/2214-drawing-triangles-pentagons-stars-etc-plugin-2007-02-09/">Polygon / Stars</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/116317-boltbaits-object-shadow-pro-v10/">Object Shadow</a></li>
+                        </ul>
+                    </li>
+                    <li>Dithering
+                        <ul>
+                            <li><a href="https://forums.getpaint.net/topic/29428-floyd-steinberg-dithering-including-source/">Floyd-Steinberg Dithering</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/112747-error-diffusion-dithering/">Error Diffusion Dithering</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/20096-simulate-color-depth-updated-13-07-11/">Simulate Color Depth</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/116414-new-developer-new-plugin-ordered-dither/">Ordered Dither</a></li>
+                            <li>Q'MIC (listed below) has many additional dither algorithms</li>
+                            <li>Quantize (built-in effect)</li>
+                        </ul>
+                    </li>
+                    <li>Tiling/Repeating/Seamless Textures
+                        <ul>
+                            <li><a href="https://forums.getpaint.net/topic/118134-move-seams-10-align-and-remove-seams-from-textures-april-22-2021/">Move Seams</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/2244-seamless-texture-helper-plugin/">Seamless Texture Helper</a></li>
+                        </ul>
+                    </li>
+                    <li>Misc
+                        <ul>
+                            <li><a href="https://forums.getpaint.net/topic/113564-gmic-2022-01-14/">Q'MIC</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/27218-chop-up-and-save-tools-effect/">Chop Up and Save</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/112730-content-aware-fill-2021-06-24/">Content Aware Fill</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/4786-steganography-hidden-images-secret-agenty-stuff-v30-updated-july-12-2014/">Steganography</a></li>
+                            <li><a href="https://forums.getpaint.net/topic/13454-animated-image-24-agif-apng/">AnimGIF</a> - Export as gif and apng. I recommend exporting as apng and converting to gif with apng2gif (listed under Free Software).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </details>
+            <details>
+                <summary><h3>VST Plugins</h3></summary>
+                <ul>
+                    <li><a href="https://www.plogue.com/products/alter-ego.html">Alter/Ego</a> - Free vocaloid thing, janky but works. Free voicebanks available online.</li>
+                    <li><a href="https://daichilab.sakura.ne.jp/softsynth/index.html">Synth1</a> - Thousands of banks available online, most are shit but some are gold.</li>
+                </ul>
+            </details>
+            <details>
+                <summary><h3>Misc</h3></summary>
+                <ul>
+                    <li><a href="https://practicaltypography.com/">Butterick's Practical Typography</a> - Free typography guide. Make your shit look nice!</li>
+                    <li><a href="https://8mb.video/">8mb.video</a> - Compress videos for Discord</li>
+                    <li><a href="https://docs.google.com/document/d/1efW69ZfyJIM_DpEcTOykwIHcPzfycUq-DJP_KkwrB_4/edit?usp=sharing">Minecraft Quality of Life Mod List</a> - List of mods that make the game better.</li>
+                    <li><a href="https://hosma.neocities.org/tokipona/index.html">Toki Pona Flashcards</a> - Learn Toki Pona words, made by <a href="https://hosma.neocities.org/">hosma</a>.</li>
+                </ul>
+            </details>
+        </article>
 
-        <h2 id="10">Dirt Simple TTRPG</h2>
-        <p>
-            2022-07-01
-        </p>
-        <p>
-            You have 3 stats: STR, DEX, and MND. To start, roll 1d8, assign to a stat, repeat. Whenever anything risky happens, decide if it is easy, medium, or hard difficulty. Choose the most relevant stat for the situation. Round its rank to the nearest die size, towards d4. Roll &ge; the target number to succeed.
-        </p>
-        <table>
-            <tr>
-                <th>Difficulty</th>
-                <th>Target #</th>
-            </tr>
-            <tr>
-                <td>Easy</td>
-                <td>&ge;4</td>
-            </tr>
-            <tr>
-                <td>Medium</td>
-                <td>&ge;6</td>
-            </tr>
-            <tr>
-                <td>Hard</td>
-                <td>&ge;8</td>
-            </tr>
-        </table> 
-        <p>
-            For example: If you have STR 7 and want to strangle a guard, roll 1d6. If you want to creep silently across the rooftops and you have DEX 2, roll 1d4.
-        </p>
-        <p>
-            Aspects are descriptive words/phrases that help represent a character and their abilities. Start with 3 aspects. They can be as specific or generic as you want, just be reasonable and fair to other players. Whenever an aspect could be applied to a situation, get a stacking +1 bonus to your roll.
-        </p>
-        <p>
-            HP is based on your species. Whenever you level up, reroll your HP. Use it even if it's lower.
-        </p>
-        <table>
-            <tr>
-                <th>Species</th>
-                <th>Starting HP</th>
-                <th>Other Bonuses</th>
-            </tr>
-            <tr>
-                <td>Pure Human</td>
-                <td>&lt;level&gt;d6</td>
-                <td>+1 MND</td>
-            </tr>
-            <tr>
-                <td>Elf</td>
-                <td>&lt;level&gt;d4</td>
-                <td>+1 DEX</td>
-            </tr>
-            <tr>
-                <td>Dwarf</td>
-                <td>&lt;level&gt;d8</td>
-                <td>+1 STR</td>
-            </tr>
-        </table> 
-        <p>
-            Stat blocks look like this: Bald Humphrey [7/4/4, Bald, Angry, Scribe, Sword, 5hp]. When attacking, he usually rolls 1d6 +1 (Angry) +1 (Sword). The format is &lt;name&gt; [&lt;STR&gt;/&lt;DEX&gt;/&lt;MND&gt;, &lt;aspects&gt;, &lt;gear&gt;, &lt;HP&gt;]
-        </p>
-        <p>
-            When attacking, only roll for damage, not to-hit. Whenever you take damage, you may subtract your armor's AP from it and permanently reduce your armor's AP by 1. When you burn your last AP, that armor is destroyed. Armor can be repaired during downtime. Shields can also be sacrificed to ignore 1 attack.
-        </p>
-        <table>
-            <tr>
-                <th>Armor</th>
-                <th>AP</th>
-            </tr>
-            <tr>
-                <td>Leather</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>Mail</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>Plate</td>
-                <td>7</td>
-            </tr>
-            <tr>
-                <td>Shield</td>
-                <td>3</td>
-            </tr>
-        </table>
-        <p>
-            Characters can't cast magic, they have to find magic items to do it for them. Monsters can though ;)
-        </p>
+        <article id="11">
+            <h2>Thoughts on Newbie Sites</h2>
+            <p>
+                2022-07-25
+            </p>
+            <p>
+                Some people complain about neocities sites that have almost no content. I kind of get it? Seeing "Hi I'm [name] and I like programming", "There's not much here yet", "This site is a work in progress", etc. does get kinda boring after a while. But at the end of the day, I think it's a good thing that they're exploring new territory and learning to program.
+            </p>
+            <p>
+                If you want to see "good" sites, then search them out. If you <i>only</i> want to see those sites, then that's just not how it works :/ I guess you could make something like <a href="https://districts.neocities.org/">districts.neocities</a> if you really want, or hope someone already made one that's acceptable in your eyes.
+            </p>
+            <p>
+                Newbies might be cringe but it's also pretty cringe to treat them like shit. Why be childish and petty on neocities? You could use that energy to do something better for your life...
+            </p>
+        </article>
+        
+        <article id="10">
+            <h2>Dirt Simple TTRPG</h2>
+            <p>
+                2022-07-01
+            </p>
+            <p>
+                You have 3 stats: STR, DEX, and MND. To start, roll 1d8, assign to a stat, repeat. Whenever anything risky happens, decide if it is easy, medium, or hard difficulty. Choose the most relevant stat for the situation. Round its rank to the nearest die size, towards d4. Roll &ge; the target number to succeed.
+            </p>
+            <table>
+                <tr>
+                    <th>Difficulty</th>
+                    <th>Target #</th>
+                </tr>
+                <tr>
+                    <td>Easy</td>
+                    <td>&ge;4</td>
+                </tr>
+                <tr>
+                    <td>Medium</td>
+                    <td>&ge;6</td>
+                </tr>
+                <tr>
+                    <td>Hard</td>
+                    <td>&ge;8</td>
+                </tr>
+            </table> 
+            <p>
+                For example: If you have STR 7 and want to strangle a guard, roll 1d6. If you want to creep silently across the rooftops and you have DEX 2, roll 1d4.
+            </p>
+            <p>
+                Aspects are descriptive words/phrases that help represent a character and their abilities. Start with 3 aspects. They can be as specific or generic as you want, just be reasonable and fair to other players. Whenever an aspect could be applied to a situation, get a stacking +1 bonus to your roll.
+            </p>
+            <p>
+                HP is based on your species. Whenever you level up, reroll your HP. Use it even if it's lower.
+            </p>
+            <table>
+                <tr>
+                    <th>Species</th>
+                    <th>Starting HP</th>
+                    <th>Other Bonuses</th>
+                </tr>
+                <tr>
+                    <td>Pure Human</td>
+                    <td>&lt;level&gt;d6</td>
+                    <td>+1 MND</td>
+                </tr>
+                <tr>
+                    <td>Elf</td>
+                    <td>&lt;level&gt;d4</td>
+                    <td>+1 DEX</td>
+                </tr>
+                <tr>
+                    <td>Dwarf</td>
+                    <td>&lt;level&gt;d8</td>
+                    <td>+1 STR</td>
+                </tr>
+            </table> 
+            <p>
+                Stat blocks look like this: Bald Humphrey [7/4/4, Bald, Angry, Scribe, Sword, 5hp]. When attacking, he usually rolls 1d6 +1 (Angry) +1 (Sword). The format is &lt;name&gt; [&lt;STR&gt;/&lt;DEX&gt;/&lt;MND&gt;, &lt;aspects&gt;, &lt;gear&gt;, &lt;HP&gt;]
+            </p>
+            <p>
+                When attacking, only roll for damage, not to-hit. Whenever you take damage, you may subtract your armor's AP from it and permanently reduce your armor's AP by 1. When you burn your last AP, that armor is destroyed. Armor can be repaired during downtime. Shields can also be sacrificed to ignore 1 attack.
+            </p>
+            <table>
+                <tr>
+                    <th>Armor</th>
+                    <th>AP</th>
+                </tr>
+                <tr>
+                    <td>Leather</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>Mail</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>Plate</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>Shield</td>
+                    <td>3</td>
+                </tr>
+            </table>
+            <p>
+                Characters can't cast magic, they have to find magic items to do it for them. Monsters can though ;)
+            </p>
+        </article>
 
-        <h2 id="9">Double RPS</h2>
-        <p>
-            A 2-handed rock-paper-scissors game I made up with my siblings long ago. Don't know if something like this already exists.
-        </p>
-        <p>
-            Basically, each hand plays its own game simultaneously. Your left vs. their right, vice versa. If a hand is beat, it is removed from the game. If one player has 2 hands left and the other only has 1, then that 1 hand faces the 2 hands simultaneously. This means that it would need to either beat both hands, or tie both hands, or beat one and tie the other.
-        </p>
-        <p>
-            DRPS “strategies”: If you have 2 hands but they only have 1, then you shouldn't use different symbols for each.
-        </p>
-        <p>
-            General RPS “strategies”: Younger kids like to start with scissors for some reason, so start with rock. People don't like to make the same move twice, and they don't expect you to either.
-        </p>
+        <article id="9">
+            <h2>Double RPS</h2>
+            <p>
+                A 2-handed rock-paper-scissors game I made up with my siblings long ago. Don't know if something like this already exists.
+            </p>
+            <p>
+                Basically, each hand plays its own game simultaneously. Your left vs. their right, vice versa. If a hand is beat, it is removed from the game. If one player has 2 hands left and the other only has 1, then that 1 hand faces the 2 hands simultaneously. This means that it would need to either beat both hands, or tie both hands, or beat one and tie the other.
+            </p>
+            <p>
+                DRPS “strategies”: If you have 2 hands but they only have 1, then you shouldn't use different symbols for each.
+            </p>
+            <p>
+                General RPS “strategies”: Younger kids like to start with scissors for some reason, so start with rock. People don't like to make the same move twice, and they don't expect you to either.
+            </p>
+        </article>
 
-        <h2 id="8">The Elevator</h2>
-        <p>
-            I jolted awake. It was deep in the night. It was quiet - what had stirred me? I had to piss. I climbed out of bed and made my way to the bathroom on our floor. I tried to stay tired, but the harsh lights forced me wide awake.
-        </p>
-        <p>
-            Finished, I stepped into the hall, but stopped. I heard a faint bell ringing, a repetetive ding! over and over again. Curious, and unnerved at the otherwise dead silence of my floor, I crept down the hall towards the source.
-        </p>
-        <p>
-            As I crept closer it grew louder and louder, more and more frantic, yet all the while bound to its repetitive rhythm. I turned the corner - it stopped - before me was the elevator, it's doors open. The silence of the floor was even more unnerving now. At once a cold terror began to grip my heart.
-        </p>
+        <article id="8">
+            <h2 id="8">The Elevator</h2>
+            <p>
+                I jolted awake. It was deep in the night. It was quiet - what had stirred me? I had to piss. I climbed out of bed and made my way to the bathroom on our floor. I tried to stay tired, but the harsh lights forced me wide awake.
+            </p>
+            <p>
+                Finished, I stepped into the hall, but stopped. I heard a faint bell ringing, a repetetive ding! over and over again. Curious, and unnerved at the otherwise dead silence of my floor, I crept down the hall towards the source.
+            </p>
+            <p>
+                As I crept closer it grew louder and louder, more and more frantic, yet all the while bound to its repetitive rhythm. I turned the corner - it stopped - before me was the elevator, it's doors open. The silence of the floor was even more unnerving now. At once a cold terror began to grip my heart.
+            </p>
+        </article>
 
-        <h2 id="7">The Future Tomes</h2>
-        <p>
-            2022-04-28
-        </p>
-        <p>
-            The Future Tomes are 7 great texts, each towering in size, gifted to humanity in its earliest years. Each text is encrypted, except for the first. The key is the answer to a difficult question given in the previous book. Brute force is not an option.
-        </p>
-        <p>
-            Each book contains a wealth of information that progresses humanity and adds to our technological sophistication.
-        </p>
-        <p>
-            Each book contains a hidden question. Finding and answering it is an effort that encompasses the entire species and spans hundreds, if not thousands, of years. Once each answer is found, the next book is unlocked and a new age begins.
-        </p>
-        <p>
-            Discovering the answer to each new question is proof of humanity's maturity. In this way, our progress is steered and checked by the great questions.
-        </p>
+        <article id="7">
+            <h2>The Future Tomes</h2>
+            <p>
+                2022-04-28
+            </p>
+            <p>
+                The Future Tomes are 7 great texts, each towering in size, gifted to humanity in its earliest years. Each text is encrypted, except for the first. The key is the answer to a difficult question given in the previous book. Brute force is not an option.
+            </p>
+            <p>
+                Each book contains a wealth of information that progresses humanity and adds to our technological sophistication.
+            </p>
+            <p>
+                Each book contains a hidden question. Finding and answering it is an effort that encompasses the entire species and spans hundreds, if not thousands, of years. Once each answer is found, the next book is unlocked and a new age begins.
+            </p>
+            <p>
+                Discovering the answer to each new question is proof of humanity's maturity. In this way, our progress is steered and checked by the great questions.
+            </p>
+        </article>
 
-        <h2 id="6" class="rainbow">Ideas</h2>
-        <p>Started 2022-04-25</p>
-        <p>Inspired by <a href="https://jackomix.neocities.org/gameideas/">Jackomix's Game Ideas Page</a></p>
-        <p>
-            [VISUAL] An art book where each page has doorways to other pages. Works like a visual choose-your-own-adventure book. You can also go to adjacent pages sometimes. The doorways can be in any style, but should have the page number marked on it or nearby.
-        </p>
-        <p>
-            [PLANETCRAWL] Intersystem planetary warfare. On paper. The GM tracks the stats of everyone. Each other player represents a species, with a homeworld planet.
-        </p>
-        <p>
-            [WASTES] A singleplayer gridcrawl with an ASCII terminal aesthetic. Possibly has robust procedural generation to make each playthrough different. Should be able to run on cheap office materials.
-        </p>
-        <p>
-            [CHSS] A chesslike videogame without a grid. Some piece movements have some wiggle-room, such as the knight or pawn. Touch to capture. Played in real-time.
-        </p>
-        <p>
-            [VIRTUE] TTRPG about gods and mythology. Each character stat is a position on a scale of a virtue to a vice. Fight god(s). Team up to pull a heist on the hell-train. Stab your allies in the back. Could have religion/cult simulator mechanics. Maybe your power is based on how many people believe in your existence?
-        </p>
-        <p>
-            [HATESIM] Is it possible to make a simulation model of human "political" interactions? Stuff like fake news, internal biases, cognitive dissonance, mob mentality, the Overton Window, etc. Everything would be an abstraction, but in a way that allows similar behavior to emerge.
-        </p>
-        <p>
-            [GRIMOIRE] A versus game that uses a physical zine format. Each player has 1 or more spellbooks/grimoires in the form of an 8 page zine. Each page can have a number of runes arranged in certain structures. The player is free to decorate their books. Gameplay involves using synergies between runes to cast spells. Not sure how it'll actually work. I envision it as an art thing as well as a game.
-        </p>
-        <p>
-            [STREETVIEW] A horror game from the perspective of google maps street view. Many different areas. No humans. Should be offputting and uneasy. Not really liminal or anything. Lots of ambience. Mostly places are pristine and sunny, and would be relaxing if something wasn't off. Maybe you could even find your in-game house, and if you look out the window you'd see a shadowy figure where the streetview is.
-        </p>
-        <p>
-            [LOGS] A "game" where you slowly uncover a sinister plot by reading various internal documents. Lots of meeting minutes, presentations, scanned papers, faxes, email/chat logs, etc. Less of a game and more just interactive fiction, although you can't actually influence the story.
-        </p>
-        <p>
-            [SCROLLMAZE] Webpage with a path that starts at the top and meanders around. In the center of the screen is your character. You use the scrollbars to scroll the background, "moving" the character around. If you move off the path you die.
-        </p>
-        <p>
-            [GARGJAM] 2-part jam. First, everyone collectively designs an ARG. Then, it becomes a game jam where everyone is assigned a piece of an ARG and must incorporate it or hide it (within reason) into their game.
-        </p>
+        <article id="6">
+            <h2 class="rainbow">Ideas</h2>
+            <p>Started 2022-04-25</p>
+            <p>Inspired by <a href="https://jackomix.neocities.org/gameideas/">Jackomix's Game Ideas Page</a></p>
+            <p>
+                [VISUAL] An art book where each page has doorways to other pages. Works like a visual choose-your-own-adventure book. You can also go to adjacent pages sometimes. The doorways can be in any style, but should have the page number marked on it or nearby.
+            </p>
+            <p>
+                [PLANETCRAWL] Intersystem planetary warfare. On paper. The GM tracks the stats of everyone. Each other player represents a species, with a homeworld planet.
+            </p>
+            <p>
+                [WASTES] A singleplayer gridcrawl with an ASCII terminal aesthetic. Possibly has robust procedural generation to make each playthrough different. Should be able to run on cheap office materials.
+            </p>
+            <p>
+                [CHSS] A chesslike videogame without a grid. Some piece movements have some wiggle-room, such as the knight or pawn. Touch to capture. Played in real-time.
+            </p>
+            <p>
+                [VIRTUE] TTRPG about gods and mythology. Each character stat is a position on a scale of a virtue to a vice. Fight god(s). Team up to pull a heist on the hell-train. Stab your allies in the back. Could have religion/cult simulator mechanics. Maybe your power is based on how many people believe in your existence?
+            </p>
+            <p>
+                [HATESIM] Is it possible to make a simulation model of human "political" interactions? Stuff like fake news, internal biases, cognitive dissonance, mob mentality, the Overton Window, etc. Everything would be an abstraction, but in a way that allows similar behavior to emerge.
+            </p>
+            <p>
+                [GRIMOIRE] A versus game that uses a physical zine format. Each player has 1 or more spellbooks/grimoires in the form of an 8 page zine. Each page can have a number of runes arranged in certain structures. The player is free to decorate their books. Gameplay involves using synergies between runes to cast spells. Not sure how it'll actually work. I envision it as an art thing as well as a game.
+            </p>
+            <p>
+                [STREETVIEW] A horror game from the perspective of google maps street view. Many different areas. No humans. Should be offputting and uneasy. Not really liminal or anything. Lots of ambience. Mostly places are pristine and sunny, and would be relaxing if something wasn't off. Maybe you could even find your in-game house, and if you look out the window you'd see a shadowy figure where the streetview is.
+            </p>
+            <p>
+                [LOGS] A "game" where you slowly uncover a sinister plot by reading various internal documents. Lots of meeting minutes, presentations, scanned papers, faxes, email/chat logs, etc. Less of a game and more just interactive fiction, although you can't actually influence the story.
+            </p>
+            <p>
+                [SCROLLMAZE] Webpage with a path that starts at the top and meanders around. In the center of the screen is your character. You use the scrollbars to scroll the background, "moving" the character around. If you move off the path you die.
+            </p>
+            <p>
+                [GARGJAM] 2-part jam. First, everyone collectively designs an ARG. Then, it becomes a game jam where everyone is assigned a piece of the ARG and must incorporate it or hide it (within reason) into their game.
+            </p>
+            <p>
+                [TELEMETRY] A multiplayer space dogfighting sim with an open-source api/protocol/whatever. Ships with a basic client, but you are encouraged to program your own. The server is authoritative and could simulate advanced effects such as gravity, accurate ballistics, space weather interference, ship subsystems breaking down, etc. Clients can move, fire, scan. The api/protocol is very simple. The game is less about the game itself and more about programming better clients than your enemies. You are allowed to completely automate your ship. You aren't allowed to make a botnet though.
+            </p>
+        </article>
 
-        <h2 id="5">Desolate Settings</h2>
-        <p>2022-04-21</p>
-        <p>How would you run a TTRPG in a desolate and empty wasteland?</p>
-        <p>
-            Say you were running a citycrawl, the polar opposite of a wasteland. The setting is filled with content. Everywhere you look, there's something.
-        </p>
-        <p>
-            Wastelands are empty. Travelling through emptiness would be boring, so let's cut that out. Now we're left with only the interesting bits, and it becomes a sort of point-crawl.
-        </p>
-        <p>
-            Another way to run a wasteland would be to make travel more interesting. Hexcrawls already do this, but they need different types of terrain/biomes in order to describe position. To the north are fog-shrouded mountains, the east is rolling plains, the coastline to the south, and black forest on the west. Without terrain, there isn't much to differentiate different intermediate locations unless you put landmarks and features everywhere.
-        </p>
-        <p>
-            I think the main thing is that the setting shouldn't actually be empty. It can look and sound empty, but it shouldn't feel empty. Rather, it should feel empty through descriptions and flavor, but be just as mechanically full as any other hexcrawl.
-        </p>
+        <article id="5">
+            <h2>Desolate Settings</h2>
+            <p>2022-04-21</p>
+            <p>How would you run a TTRPG in a desolate and empty wasteland?</p>
+            <p>
+                Say you were running a citycrawl, the polar opposite of a wasteland. The setting is filled with content. Everywhere you look, there's something.
+            </p>
+            <p>
+                Wastelands are empty. Travelling through emptiness would be boring, so let's cut that out. Now we're left with only the interesting bits, and it becomes a sort of point-crawl.
+            </p>
+            <p>
+                Another way to run a wasteland would be to make travel more interesting. Hexcrawls already do this, but they need different types of terrain/biomes in order to describe position. To the north are fog-shrouded mountains, the east is rolling plains, the coastline to the south, and black forest on the west. Without terrain, there isn't much to differentiate different intermediate locations unless you put landmarks and features everywhere.
+            </p>
+            <p>
+                I think the main thing is that the setting shouldn't actually be empty. It can look and sound empty, but it shouldn't feel empty. Rather, it should feel empty through descriptions and flavor, but be just as mechanically full as any other hexcrawl.
+            </p>
+        </article>
 
-        <h2 id="4">Is ethics absurd?</h2>
-        <p>
-            2022-04-21
-        </p>
-        <p>
-            We could use an existing system of rules (either given by God, or otherwise arbitrarily determined) to determine what's right or wrong. In this case, we'd better be ready to accept the rulings, even if they conflict with our intuitions. No system exists that fully satisfies all of our moral intuitions.
-        </p>
-        <p>
-            We could instead choose a system of rules based on our own intuitions. We would basically be ruling based on our own intuitions, with extra steps. However, not everyone has the same intuitions. This ends up being disguised moral relativism.
-        </p>
-        <p>
-            Ok, so what if we really don't like moral relativism? If we go the first route, we need to decide on a system to use. This system will not always agree with our moral intuitions, but we need to follow it anyways. Which system we choose is arbitrary, but what practical aspects might we consider?
-        </p>
-        <ul>
-            <li>elegant vs. convoluted</li>
-            <li>specific goals? (i.e. Utilitarianism)</li>
-            <li>how practical to implement</li>
-            <li>how well defined (i.e. Utile calculus is hardly defined at all)</li>
-        </ul>
-        <p>
-            We either arbitrarily choose a system to follow, or choose one based on our moral intuitions. But, because our moral intuitions can be different, we won't agree on which system to follow. A system that agrees with all of our moral intuitions would basically be a form of moral relativism, although maybe much more convoluted and impractical. On the other hand, if we arbitrarily choose a system to follow, we will have a bad time because it will not always agree with our moral intuitions. This makes me think that ethics is absurd and that moral relativism is really how we act in practice. A more practical route would be to analyze our moral relativism in practice rather than discussing rule systems.
-        </p>
+        <article id="4">
+            <h2>Is ethics absurd?</h2>
+            <p>
+                2022-04-21
+            </p>
+            <p>
+                We could use an existing system of rules (either given by God, or otherwise arbitrarily determined) to determine what's right or wrong. In this case, we'd better be ready to accept the rulings, even if they conflict with our intuitions. No system exists that fully satisfies all of our moral intuitions.
+            </p>
+            <p>
+                We could instead choose a system of rules based on our own intuitions. We would basically be ruling based on our own intuitions, with extra steps. However, not everyone has the same intuitions. This ends up being disguised moral relativism.
+            </p>
+            <p>
+                Ok, so what if we really don't like moral relativism? If we go the first route, we need to decide on a system to use. This system will not always agree with our moral intuitions, but we need to follow it anyways. Which system we choose is arbitrary, but what practical aspects might we consider?
+            </p>
+            <ul>
+                <li>elegant vs. convoluted</li>
+                <li>specific goals? (i.e. Utilitarianism)</li>
+                <li>how practical to implement</li>
+                <li>how well defined (i.e. Utile calculus is hardly defined at all)</li>
+            </ul>
+            <p>
+                We either arbitrarily choose a system to follow, or choose one based on our moral intuitions. But, because our moral intuitions can be different, we won't agree on which system to follow. A system that agrees with all of our moral intuitions would basically be a form of moral relativism, although maybe much more convoluted and impractical. On the other hand, if we arbitrarily choose a system to follow, we will have a bad time because it will not always agree with our moral intuitions. This makes me think that ethics is absurd and that moral relativism is really how we act in practice. A more practical route would be to analyze our moral relativism in practice rather than discussing rule systems.
+            </p>
+        </article>
 
-        <h2 id="3">The Magician</h2>
-        <p>
-            The Magician raised his flute to his lips and played a haunting tune, it's shrill notes piercing the night air. At once, the City of Glass shattered.
-        </p>
-        <p>
-            The spirits of the four winds, ever hungry, descended upon the sandy corpse of the city and swept its remains across the land.
-        </p>
-        <p>
-            The Magician turned and pocketed his flute.
-        </p>
-        <p>
-            Long, long ago, before men walked the world, before life had touched the land, The Magician had helped the gods plan reality. Unbeknownst to them, however, he had inscribed a secret symbol unto the very foundations of the world. The symbol, present now in every being and place in the world, was the source of his power.
-        </p>
-        <p>
-            This secret symbol is The Magician's great secret. With knowledge of it, one can travel to any place and time, seemingly at will.
-        </p>
-        <p>
-            Even today, the gods do not know his great secret, though they perpetually hunt him for it.
-        </p>
-        <p>
-            The Magician has lived many lifetimes. When he grows old and frail, he transports himself to a secret location to meet with his past self. Here, he gifts himself all of his memories and knowledge, before dying peacefully. His past self then becomes his new self.
-        </p>
-        <p>
-            Unfortunately, through many generations of stealing his past self from the past, time has become unstable.
-        </p>
-        <p>
-            Enraged at his trick, the gods branded The Magician a divine outlaw - any man who knowingly helped or harbored him would suffer the wrath of the gods.
-        </p>
+        <article id="3">
+            <h2>The Magician</h2>
+            <p>
+                The Magician raised his flute to his lips and played a haunting tune, it's shrill notes piercing the night air. At once, the City of Glass shattered.
+            </p>
+            <p>
+                The spirits of the four winds, ever hungry, descended upon the sandy corpse of the city and swept its remains across the land.
+            </p>
+            <p>
+                The Magician turned and pocketed his flute.
+            </p>
+            <p>
+                Long, long ago, before men walked the world, before life had touched the land, The Magician had helped the gods plan reality. Unbeknownst to them, however, he had inscribed a secret symbol unto the very foundations of the world. The symbol, present now in every being and place in the world, was the source of his power.
+            </p>
+            <p>
+                This secret symbol is The Magician's great secret. With knowledge of it, one can travel to any place and time, seemingly at will.
+            </p>
+            <p>
+                Even today, the gods do not know his great secret, though they perpetually hunt him for it.
+            </p>
+            <p>
+                The Magician has lived many lifetimes. When he grows old and frail, he transports himself to a secret location to meet with his past self. Here, he gifts himself all of his memories and knowledge, before dying peacefully. His past self then becomes his new self.
+            </p>
+            <p>
+                Unfortunately, through many generations of stealing his past self from the past, time has become unstable.
+            </p>
+            <p>
+                Enraged at his trick, the gods branded The Magician a divine outlaw - any man who knowingly helped or harbored him would suffer the wrath of the gods.
+            </p>
+        </article>
+
+        <article id="2">
+            <h2>Terminal</h2>
+            <p>
+                With a soft click, Ezra popped open the terminal's security pad. Just behind, there was a square debug port. Under normal circumstances, it would have been disabled, but the last maintenance crew had left it open. All to plan.
+            </p>
+            <p>
+                Ezra snaked a cable over to the port, and powered on his deck. A premade script took care of the terminal's security system, and the system was his.
+            </p>
+            <p>
+                Ezra popped the system's memory cassette and made a copy of it with his dual cassette player, before reinserting it. The copy, he would keep for later. Carefully, he disconnected the cable, reattached the keypad, and rebooted the system. ALL WELL flashed across the screen.
+            </p>
+        </article>
 
 
-        <h2 id="2">Terminal</h2>
-        <p>
-            With a soft click, Ezra popped open the terminal's security pad. Just behind, there was a square debug port. Under normal circumstances, it would have been disabled, but the last maintenance crew had left it open. All to plan.
-        </p>
-        <p>
-            Ezra snaked a cable over to the port, and powered on his deck. A premade script took care of the terminal's security system, and the system was his.
-        </p>
-        <p>
-            Ezra popped the system's memory cassette and made a copy of it with his dual cassette player, before reinserting it. The copy, he would keep for later. Carefully, he disconnected the cable, reattached the keypad, and rebooted the system. ALL WELL flashed across the screen.
-        </p>
-
-
-        <h2 id="1">Black Planet</h2>
-        <p>
-            Beneath the black sky, beyond the ancient oak, below the arched ruin, it stood. The oasis itself, once lush, now dust, was encircled by miles of flat wasteland. Damp, black, sand stretched to the horizon, where set two dying suns.
-        </p>
-        <p>
-            In the center of the oasis was a single ivory pillar. Suspended above, a single perfect drop of water, suspended in time.
-        </p>
-        <p>
-            Briefly, there was a shudder. A shock. Light. And then there was light, emanating with incomprehensible force and power, like water under pressure finally escaping its valve. Tears of light, tears of white, and a towering beacon driving deep into the sky. An electrified rush fills the desert wastes. The mountainous rocks in the distance are bleached white, their faces seared of a millenia of darkness.
-        </p>
-        <p>
-            A hulking metal thing, a wretched thing, rusted by milleneae of isolation, shuffles across the wastes. It crawls, inch by inch, towards the distant oasis, towards the beacon of light.
-        </p>
-        <p>
-            A hulking metal thing, a wretched thing, rusted by milleneae of isolation, shuffles beneath the black sky, beyond the ancient oak, below the arched ruin. It stands, hunched, in front of the ivory pillar.
-        </p>
-        <p>
-            With a quiet whirr, the thing reaches an appendage deep inside itself, presenting a black engraved obsidian box. It opens the box atop the pillar, releasing a single perfect drop of water, suspended in time.
-        </p>
-        <p>
-            In the distant horizon, the dying sun sets.
-        </p>
-        <p>
-            In the final day of the final sun, every oasis crumbles. The arch reduces to dust, the ancient oak withers. They have failed to ignite the light, and once again the world grows black.
-        </p>
+        <article id="1">
+            <h2>Black Planet</h2>
+            <p>
+                Beneath the black sky, beyond the ancient oak, below the arched ruin, it stood. The oasis itself, once lush, now dust, was encircled by miles of flat wasteland. Damp, black, sand stretched to the horizon, where set two dying suns.
+            </p>
+            <p>
+                In the center of the oasis was a single ivory pillar. Suspended above, a single perfect drop of water, suspended in time.
+            </p>
+            <p>
+                Briefly, there was a shudder. A shock. Light. And then there was light, emanating with incomprehensible force and power, like water under pressure finally escaping its valve. Tears of light, tears of white, and a towering beacon driving deep into the sky. An electrified rush fills the desert wastes. The mountainous rocks in the distance are bleached white, their faces seared of a millenia of darkness.
+            </p>
+            <p>
+                A hulking metal thing, a wretched thing, rusted by milleneae of isolation, shuffles across the wastes. It crawls, inch by inch, towards the distant oasis, towards the beacon of light.
+            </p>
+            <p>
+                A hulking metal thing, a wretched thing, rusted by milleneae of isolation, shuffles beneath the black sky, beyond the ancient oak, below the arched ruin. It stands, hunched, in front of the ivory pillar.
+            </p>
+            <p>
+                With a quiet whirr, the thing reaches an appendage deep inside itself, presenting a black engraved obsidian box. It opens the box atop the pillar, releasing a single perfect drop of water, suspended in time.
+            </p>
+            <p>
+                In the distant horizon, the dying sun sets.
+            </p>
+            <p>
+                In the final day of the final sun, every oasis crumbles. The arch reduces to dust, the ancient oak withers. They have failed to ignite the light, and once again the world grows black.
+            </p>
+        </article>
 
         <p>
             More coming soon<span class="cursor">&#9608;</span>
