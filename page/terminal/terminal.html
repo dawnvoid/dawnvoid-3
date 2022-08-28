@@ -292,8 +292,16 @@
                 let one_png_file = mnt_dir.create_file('1.png', '/assets/puzzle/1.png')
                 let two_gif_file = mnt_dir.create_file('2.gif', '/assets/puzzle/2.gif')
                 let three_png_file = mnt_dir.create_file('3.png', '/assets/puzzle/3.png')
-                let a_gif_file = mnt_dir.create_file('a.gif', '/assets/puzzle/a.gif')
-                let b_gif_file = mnt_dir.create_file('b.gif', '/assets/puzzle/b.gif')
+                let four_txt_file = mnt_dir.create_file('4.txt',
+                    '4.zip is available at https://drive.google.com/file/d/1fPtNGvE5iVs5AKv3RdWzGkJxUx8ObvmR/view?usp=sharing'
+                    + '\nIf the link breaks, send me an email or something.'
+                )
+                let five_txt_file = mnt_dir.create_file('5.txt',
+                    '5.wav is available at https://drive.google.com/file/d/1mHTCupu4MPfTcbJqsFe9jBsJxTfNEnx6/view?usp=sharing'
+                    + '\nIf the link breaks, send me an email or something.'
+                )
+                // let a_gif_file = mnt_dir.create_file('a.gif', '/assets/puzzle/a.gif')
+                // let b_gif_file = mnt_dir.create_file('b.gif', '/assets/puzzle/b.gif')
                 let pwd = root_dir
 
                 function enterDirectory(target_dir) {
@@ -499,6 +507,15 @@
                     writeln(str)
                 }
 
+                function hasExtension(str='', extensions=[]) {
+                    for (let idxExtension = 0; idxExtension < extensions.length; idxExtension++) {
+                        if (str.endsWith(extensions[idxExtension])) {
+                            return true
+                        }
+                    }
+                    return false
+                }
+
                 // Lex input into tokens:
                 function lex(command) {
                     let tokens = []
@@ -631,7 +648,7 @@
                         writeln('mkdir &lt;directory path&gt; [more directory paths] (create directories)')
                         writeln('pwd (show current working directory)')
                         writeln('cat &lt;file path&gt; (show file contents)')
-                        writeln('render &lt;image file path&gt; [additional images] (draw image to screen)')
+                        writeln('render &lt;image file path&gt; [additional images] (draw media to screen)')
                         writeln()
                         writeln("Separate multiple commands with semicolons, ie. 'print hello,; print world!'")
                         writeln("Enclose arguments with spaces in quotes, ie. 'print \"hello, world!\"'")
@@ -732,10 +749,10 @@
                             writeln('\tcat readme.md')
                         } else if (args[0] === 'render') {
                             writeln('---[render]---')
-                            writeln('Draws image files to the screen.')
+                            writeln('Draws media files to the screen.')
                             writeln()
                             writeln('syntax:')
-                            writeln('\trender &lt;image file path&gt; [more images]')
+                            writeln('\trender &lt;media file path&gt; [more files]')
                             writeln()
                             writeln('example:')
                             writeln('\trender images/background.png')
@@ -963,7 +980,17 @@
                             let target_file = getFileItem(arg)
                             if (target_file instanceof File) {
                                 let src = target_file.contents
-                                writeln('<img src="' + src + '" style="margin-top: 1ch; margin-bottom: 1ch;">')
+
+                                if (hasExtension(target_file.name, [".png", ".jpg", ".gif"])) {
+                                    writeln('<img src="' + src + '" style="margin-top: 1ch; margin-bottom: 1ch;">')
+                                } else if (hasExtension(target_file.name, [".wav", ".mp3", ".ogg"])) {
+                                    writeln('<audio controls><source src="' + src + '"></audio>')
+                                    // writeln('<iframe frameborder="0" src="' + src +'"></iframe>')
+                                } else {
+                                    result = "file '" + arg + "' is an unknown filetype"
+                                    is_ok = false
+                                }
+
                             } else {
                                 result = "file '" + arg + "' does not exist"
                                 is_ok = false
